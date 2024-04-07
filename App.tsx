@@ -1,13 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import SplashPage from './pages/SplashPage';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import WelcomeScreen from './pages/WelcomeScreen';
 export default function App() {
+  const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <SplashPage/>
-      <Text>Welcom</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Welcome" component={WelcomeScreen}/>
+        </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
