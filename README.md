@@ -1,3 +1,8 @@
-This is Autantication process project , which designed in react native , by using expo , 
-and is demonstrating autantication process , where i will be designing  signup-up form,
-login form, validation of email and password, i have figma design of it , that will help me to emplimate incodes by using react native , 
+HOOP - Your Convenient Parking Solution
+Welcome to HOOP, your ultimate destination 
+for hassle-free parking booking. With HOOP, 
+parking your car, taxi, or motorbike has 
+never been easier. Simply download our 
+app and gain access to a seamless parking
+experience, whether you need a spot for 
+a few hours, a whole day, or even on a monthly basis.
