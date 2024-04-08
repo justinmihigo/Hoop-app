@@ -15,7 +15,7 @@ export default function App() {
 
       <Provider>
         <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerShown:false}}>
           <Stack.Screen name='/' component={WelcomeScreen}/>
           <Stack.Screen name='login' component={LoginScreen}/>
           <Stack.Screen name='loginbyemail' component={LoginByEmail}/>

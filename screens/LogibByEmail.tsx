@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-
+import { useFonts } from 'expo-font';
 
 export default function LoginByEmail() {
 
@@ -17,7 +17,12 @@ export default function LoginByEmail() {
         })
         
     },[])
-    
+    const [fontLoaded] = useFonts({
+        'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
+        'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
+        'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
+    })
+    if (!fontLoaded) return null;
 
   return (
     <SafeAreaView style={styles.parent}>
@@ -36,7 +41,7 @@ export default function LoginByEmail() {
               
                   </TextInput>
                   <TextInput placeholder='Password' style={styles.input}></TextInput>
-                  <Text style={styles.forgot}>Forgot password ? <Text style={{ color: "red"}}>Retrieve</Text></Text>
+                  <Text style={styles.forgot}>Forgot password ? <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
                   
               </View>
               <View>
@@ -48,7 +53,7 @@ export default function LoginByEmail() {
                       <Text style={styles.inner}>Login</Text>
                   </TouchableOpacity>
 
-                  <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("signup")}>sign Up</Text></Text>
+                  <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("signup" as never)}>Sign up</Text></Text>
                   
               </View>
              
@@ -80,8 +85,8 @@ const styles = StyleSheet.create({
 
     headerText: {
         fontSize: 32,
-        fontWeight: "500",
         color: "white",
+        fontFamily:"Avenirroman",
         // fontFamily:"Avenir"
         
     },
@@ -108,7 +113,7 @@ const styles = StyleSheet.create({
         padding: 13,
         borderRadius: 15,
         backgroundColor: "white",
-    
+        fontFamily:"Avenir",
     },
 
     btn: {
@@ -131,10 +136,11 @@ const styles = StyleSheet.create({
     acts: {
         textAlign: "center",
         marginTop: 10,
-        color: "#2D2D2D80"
+        color: "#2D2D2D80",
+        fontFamily:"Avenir",
     },
     forgot:
-        { marginLeft: "auto", color: "#2D2D2D80", fontSize: 14 },
+        { marginLeft: "auto", color: "#2D2D2D80", fontSize: 14, fontFamily:"Avenir", },
 
     countryPicker: {
         width: "100%",

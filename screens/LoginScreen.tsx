@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, Touch
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
-
+import { useFonts } from 'expo-font';
 export default function LoginSCreen() {
 
     const [selectedCountryCode,setSelectedCountryCode]= useState("")
@@ -33,7 +33,12 @@ export default function LoginSCreen() {
         })
         
     },[])
-    
+    const [fontLoaded] = useFonts({
+        'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
+        'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
+        'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
+    })
+    if (!fontLoaded) return null;   
 
   return (
     <SafeAreaView style={styles.parent}>
@@ -47,10 +52,10 @@ export default function LoginSCreen() {
                   
                    <View style={styles.countryPicker}>
                       <Picker
-                          ref={pickerRef}
+                          ref={pickerRef as any}
                             selectedValue={selectedCountryCode}
                             onValueChange={(itemValue) => setSelectedCountryCode(itemValue)}
-                          style={{ height: 50, width: 120 }}
+                          style={{ height: 50, width: 120, fontFamily:"Avenir" }}
                           numberOfLines={1}
                           
                         >
@@ -82,7 +87,7 @@ export default function LoginSCreen() {
                       <Text style={styles.inner}>Login</Text>
                   </TouchableOpacity>
 
-                  <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("signup")}>sign Up</Text></Text>
+                  <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("signup" as never)}>Sign up</Text></Text>
                   
               </View>
              
@@ -114,7 +119,7 @@ const styles = StyleSheet.create({
 
     headerText: {
         fontSize: 32,
-        fontWeight: "500",
+        fontFamily:"Avenirroman",
         color: "white",
         // fontFamily:"Avenir"
         
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
         padding: 13,
         borderRadius: 15,
         backgroundColor: "white",
-    
+        fontFamily:'Avenir',
     },
 
     btn: {
@@ -156,6 +161,7 @@ const styles = StyleSheet.create({
 
     inner: {
         color: "white",
+        fontFamily:'Avenir',
     } ,
 
     actions: {
@@ -165,17 +171,19 @@ const styles = StyleSheet.create({
     acts: {
         textAlign: "center",
         marginTop: 10,
-        color: "#2D2D2D80"
+        color: "#2D2D2D80",
+        fontFamily: 'Avenir',
     },
     forgot:
-        { marginLeft: "auto", color: "#2D2D2D80", fontSize: 14 },
+        { marginLeft: "auto", color: "#2D2D2D80", fontSize: 14, fontFamily: "Avenir"},
 
     countryPicker: {
         width: "100%",
         borderRadius: 15,
         backgroundColor: "white",
         marginBottom: 10,
-        flexDirection:"row"
+        flexDirection:"row",
+        fontFamily: "Avenir"
     }
     
 })

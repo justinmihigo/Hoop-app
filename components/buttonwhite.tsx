@@ -7,12 +7,12 @@ const ButtonWhite: React.FC=()=>{
     if(!fontsLoaded) return null;
     return(
         <View>
-            <Pressable style={styles.button} onPress={()=>alert("Hello")}>
+            <View style={styles.button}>
                 <View style={styles.flex}>
                     <FontAwesomeIcon icon={faPhone} size={20} />
                     <Text style={styles.btntxt}> Login with phone</Text>
                 </View>
-            </Pressable>
+            </View>
             
         </View>
     )

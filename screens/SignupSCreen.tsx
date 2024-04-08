@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
 
 export default function SignupSCreen() {
 
@@ -13,7 +14,12 @@ export default function SignupSCreen() {
         })
         
     },[])
-    
+    const [fontLoaded] = useFonts({
+        'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
+        'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
+        'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
+    })
+    if (!fontLoaded) return null;
 
   return (
     <SafeAreaView style={styles.parent}>
@@ -37,7 +43,7 @@ export default function SignupSCreen() {
                       <Text style={styles.inner}>Register</Text>
                   </TouchableOpacity>
 
-                  <Text style={styles.acts}>Have any account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("login")}>sign in</Text></Text>
+                  <Text style={styles.acts}>Have any account ? <Text style={{color:"red", fontFamily:'Avenir'}} onPress={()=>navigator.navigate("login" as never)}>sign in</Text></Text>
                   
               </View>
              
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
 
     headerText: {
         fontSize: 32,
-        fontWeight: "500",
+        fontFamily:'Avenirroman',
         color: "white",
         // fontFamily:"Avenir"
         
@@ -97,6 +103,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 5,
         backgroundColor: "white",
+        fontFamily:'Avenir'
     
     },
 
@@ -111,6 +118,7 @@ const styles = StyleSheet.create({
 
     inner: {
         color: "white",
+        fontFamily:'Avenir',
     } ,
 
     actions: {
@@ -119,8 +127,9 @@ const styles = StyleSheet.create({
 
     acts: {
         textAlign: "center",
-        marginTop: 10,
-        color: "#2D2D2D80"
+        marginTop: 20,
+        color: "#2D2D2D80",
+        fontFamily: 'Avenir'
     }
     
 })

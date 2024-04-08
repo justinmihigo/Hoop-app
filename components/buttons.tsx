@@ -7,12 +7,12 @@ const Button: React.FC=()=>{
     if(!fontsLoaded) return null;
     return(
         <View>
-            <Pressable style={styles.button} onPress={()=>alert("Hello")}>
+            <View style={styles.button}>
                 <View style={styles.flex}>
                     <FontAwesomeIcon icon={faEnvelope} size={20} color="#fff"/>
                     <Text style={styles.btntxt}> Login with email</Text>
                 </View>
-            </Pressable>
+            </View>
             
         </View>
     )
