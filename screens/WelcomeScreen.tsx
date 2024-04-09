@@ -5,7 +5,6 @@ import ButtonWhite from "../components/buttonwhite";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native"
 import { NativeScreen } from "react-native-screens";
-// import { Image } from "expo-image";
 interface Item {
     id: string;
     image: ImageSourcePropType;

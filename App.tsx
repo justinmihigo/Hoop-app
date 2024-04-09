@@ -6,6 +6,9 @@ import SignupSCreen from './screens/SignupSCreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import Provider from './context/Provider';
 import LoginByEmail from './screens/LogibByEmail';
+import ForgetPassword from './screens/ForgetPassword';
+import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
+
 
 const Stack = createNativeStackNavigator()
 
@@ -14,14 +17,17 @@ export default function App() {
     
 
       <Provider>
-        <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-          <Stack.Screen name='/' component={WelcomeScreen}/>
-          <Stack.Screen name='login' component={LoginScreen}/>
-          <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
-          <Stack.Screen name='signup' component={SignupSCreen}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{headerShown:false}}>
+            
+              <Stack.Screen name='/' component={WelcomeScreen}/>
+              <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
+              <Stack.Screen name='login' component={LoginScreen}/>
+              <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
+              <Stack.Screen name='ForgetPass' component={ForgetPassword}/>
+              <Stack.Screen name='signup' component={SignupSCreen}/> 
+              </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
       
   );
