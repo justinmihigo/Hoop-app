@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
-import {createNativeStackNavigator} from "@react-navigation/native-stack"
-import {NavigationContainer} from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { NavigationContainer } from "@react-navigation/native"
 import LoginScreen from './screens/LoginScreen';
 import SignupSCreen from './screens/SignupSCreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -8,32 +8,40 @@ import Provider from './context/Provider';
 import LoginByEmail from './screens/LogibByEmail';
 import OtpScreen from './screens/Otpscreen';
 import PinVerify from './screens/PinVerify';
+import UserProfile from './screens/UserProfile';
+import DetailCategory from './screens/DetailCategory';
+import DetailParking from './screens/DetailsParking';
+import TrackingParking from './screens/TrackingParking';
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    
 
-      <Provider>
-        <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
+
+    <Provider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='trackingParking' component={TrackingParking}></Stack.Screen>
+          <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
+          <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
+          <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen>
+          <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
           <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
-          <Stack.Screen name='welcome' component={WelcomeScreen}/>
-          <Stack.Screen name='login' component={LoginScreen}/>
-          <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
-          <Stack.Screen name='signup' component={SignupSCreen}/>
+          <Stack.Screen name='welcome' component={WelcomeScreen} />
+          <Stack.Screen name='login' component={LoginScreen} />
+          <Stack.Screen name='loginbyemail' component={LoginByEmail} />
+          <Stack.Screen name='signup' component={SignupSCreen} />
         </Stack.Navigator>
       </NavigationContainer>
-      </Provider>
-      
+    </Provider>
+
   );
 }
 
 //navigationn container
-  //naviagtor
-    //screens
+//naviagtor
+//screens
 
 
 const styles = StyleSheet.create({
