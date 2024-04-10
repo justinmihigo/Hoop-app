@@ -8,6 +8,8 @@ import Provider from './context/Provider';
 import LoginByEmail from './screens/LogibByEmail';
 import OtpScreen from './screens/Otpscreen';
 import PinVerify from './screens/PinVerify';
+import ForgetPassword from './screens/ForgetPassword';
+import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
 
 const Stack = createNativeStackNavigator()
 
@@ -16,16 +18,18 @@ export default function App() {
     
 
       <Provider>
-        <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
-          <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
-          <Stack.Screen name='welcome' component={WelcomeScreen}/>
-          <Stack.Screen name='login' component={LoginScreen}/>
-          <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
-          <Stack.Screen name='signup' component={SignupSCreen}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+          <NavigationContainer>
+              <Stack.Navigator screenOptions={{headerShown:false}}>
+              <Stack.Screen name='/' component={WelcomeScreen}/>
+              <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
+              <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
+              <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
+              <Stack.Screen name='login' component={LoginScreen}/>
+              <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
+              <Stack.Screen name='ForgetPass' component={ForgetPassword}/>
+              <Stack.Screen name='signup' component={SignupSCreen}/> 
+              </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
       
   );

@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Pressable } from 'react-native'
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,Link } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 
 export default function LoginByEmail() {
@@ -41,7 +41,7 @@ export default function LoginByEmail() {
               
                   </TextInput>
                   <TextInput placeholder='Password' style={styles.input}></TextInput>
-                  <Text style={styles.forgot}>Forgot password ? <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
+                  <Text style={styles.forgot}><Link to={"/ForgetPass"}><Text>Forgot password ?</Text></Link> <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
                   
               </View>
               <View>
