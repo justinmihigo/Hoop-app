@@ -12,30 +12,33 @@ import UserProfile from './screens/UserProfile';
 import DetailCategory from './screens/DetailCategory';
 import DetailParking from './screens/DetailsParking';
 import TrackingParking from './screens/TrackingParking';
+import ForgetPassword from './screens/ForgetPassword';
+import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
 
-
-    <Provider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='trackingParking' component={TrackingParking}></Stack.Screen>
-          <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
-          <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
-          <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen>
-          <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
-          <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
-          <Stack.Screen name='welcome' component={WelcomeScreen} />
-          <Stack.Screen name='login' component={LoginScreen} />
-          <Stack.Screen name='loginbyemail' component={LoginByEmail} />
-          <Stack.Screen name='signup' component={SignupSCreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-
+      <Provider>
+          <NavigationContainer>
+              <Stack.Navigator screenOptions={{headerShown:false}}>
+              <Stack.Screen name='/' component={WelcomeScreen}/>
+              <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
+              <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
+              <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
+              <Stack.Screen name='login' component={LoginScreen}/>
+              <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
+              <Stack.Screen name='ForgetPass' component={ForgetPassword}/>
+              <Stack.Screen name='signup' component={SignupSCreen}/> 
+              <Stack.Screen name='trackingParking' component={TrackingParking}></Stack.Screen>
+              <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
+              <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
+              <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen>
+              </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+      
   );
 }
 

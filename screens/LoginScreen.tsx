@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,Link } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 export default function LoginSCreen() {
@@ -75,7 +75,7 @@ export default function LoginSCreen() {
                   
                  
                   <TextInput placeholder='Phone number' style={styles.input}></TextInput>
-                  <Text style={styles.forgot}>Forgot password ? <Text style={{ color: "red"}}>Retrieve</Text></Text>
+                  <Text style={styles.forgot}> <Link to={"/ForgetPass"}><Text>Forgot password ? </Text></Link><Text style={{ color: "red"}}>Retrieve</Text></Text>
                   
               </View>
               <View>
@@ -84,7 +84,7 @@ export default function LoginSCreen() {
               <View style={styles.actions}>
                   
                   <TouchableOpacity style={styles.btn}>
-                      <Text style={styles.inner}>Login</Text>
+                      <Link to={"/comfirm-forger"}><Text style={styles.inner}>Login</Text></Link>
                   </TouchableOpacity>
 
                   <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("signup" as never)}>Sign up</Text></Text>
