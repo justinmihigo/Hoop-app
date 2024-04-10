@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
-import {createNativeStackNavigator} from "@react-navigation/native-stack"
-import {NavigationContainer} from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { NavigationContainer } from "@react-navigation/native"
 import LoginScreen from './screens/LoginScreen';
 import SignupSCreen from './screens/SignupSCreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -8,6 +8,10 @@ import Provider from './context/Provider';
 import LoginByEmail from './screens/LogibByEmail';
 import OtpScreen from './screens/Otpscreen';
 import PinVerify from './screens/PinVerify';
+import UserProfile from './screens/UserProfile';
+import DetailCategory from './screens/DetailCategory';
+import DetailParking from './screens/DetailsParking';
+import TrackingParking from './screens/TrackingParking';
 import ForgetPassword from './screens/ForgetPassword';
 import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
 
@@ -15,7 +19,6 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    
 
       <Provider>
           <NavigationContainer>
@@ -28,6 +31,10 @@ export default function App() {
               <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
               <Stack.Screen name='ForgetPass' component={ForgetPassword}/>
               <Stack.Screen name='signup' component={SignupSCreen}/> 
+              <Stack.Screen name='trackingParking' component={TrackingParking}></Stack.Screen>
+              <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
+              <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
+              <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen>
               </Stack.Navigator>
         </NavigationContainer>
       </Provider>
@@ -36,8 +43,8 @@ export default function App() {
 }
 
 //navigationn container
-  //naviagtor
-    //screens
+//naviagtor
+//screens
 
 
 const styles = StyleSheet.create({
