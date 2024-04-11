@@ -26,9 +26,9 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-              <Stack.Screen name='/' component={History}/>
+              <Stack.Screen name='history' component={History}/>
               <Stack.Screen name='explore' component={Explore}/>
-               <Stack.Screen name='welcome' component={WelcomeScreen}/> 
+               <Stack.Screen name='/' component={WelcomeScreen}/> 
               <Stack.Screen name='home' component={Categories}></Stack.Screen>
                <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
