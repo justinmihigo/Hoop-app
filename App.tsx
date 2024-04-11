@@ -14,6 +14,9 @@ import DetailParking from './screens/DetailsParking';
 import TrackingParking from './screens/TrackingParking';
 import ForgetPassword from './screens/ForgetPassword';
 import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
+import Categories from './screens/Home';
+import Explore from './screens/Explore';
+import History from './screens/History';
 
 const Stack = createNativeStackNavigator()
 
@@ -23,8 +26,11 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-              <Stack.Screen name='/' component={WelcomeScreen}/>
-              <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
+              <Stack.Screen name='history' component={History}/>
+              <Stack.Screen name='explore' component={Explore}/>
+               <Stack.Screen name='/' component={WelcomeScreen}/> 
+              <Stack.Screen name='home' component={Categories}></Stack.Screen>
+               <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
               <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
               <Stack.Screen name='login' component={LoginScreen}/>
@@ -34,7 +40,7 @@ export default function App() {
               <Stack.Screen name='trackingParking' component={TrackingParking}></Stack.Screen>
               <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
               <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
-              <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen>
+              <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen> 
               </Stack.Navigator>
         </NavigationContainer>
       </Provider>
