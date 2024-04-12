@@ -14,6 +14,11 @@ import DetailParking from './screens/DetailsParking';
 import TrackingParking from './screens/TrackingParking';
 import ForgetPassword from './screens/ForgetPassword';
 import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
+import Payment from './screens/Payment';
+import PaymentDetails from './screens/PaymentDetails';
+import PaymentSuccess from './screens/PaymentSuccess';
+import DetailHistory from './screens/DetailHistory';
+import Notifications from './screens/Notifications';
 import Categories from './screens/Home';
 import Explore from './screens/Explore';
 import History from './screens/History';
@@ -29,10 +34,16 @@ export default function App() {
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
               <Stack.Screen name='/' component={Profile}/> 
-                <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
+               <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
+              <Stack.Screen name='notifications' component={Notifications}/>
+              <Stack.Screen name='detailHistory' component={DetailHistory}/>
+              <Stack.Screen name='paymentSuccess' component={PaymentSuccess}/>
+              <Stack.Screen name='paymentDetails' component={PaymentDetails}/>
+              <Stack.Screen name='payment' component={Payment}/>
+              <Stack.Screen name='/' component={EditProfile}></Stack.Screen>
               <Stack.Screen name='history' component={History}/>
               <Stack.Screen name='explore' component={Explore}/>
-               <Stack.Screen name='welcome' component={WelcomeScreen}/> 
+              <Stack.Screen name='welcome' component={WelcomeScreen}/> 
               <Stack.Screen name='home' component={Categories}></Stack.Screen>
                <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
