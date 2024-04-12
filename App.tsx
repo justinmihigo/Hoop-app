@@ -19,6 +19,10 @@ import PaymentDetails from './screens/PaymentDetails';
 import PaymentSuccess from './screens/PaymentSuccess';
 import DetailHistory from './screens/DetailHistory';
 import Notifications from './screens/Notifications';
+import Categories from './screens/Home';
+import Explore from './screens/Explore';
+import History from './screens/History';
+import EditProfile from './screens/EditProfile';
 
 const Stack = createNativeStackNavigator()
 
@@ -33,8 +37,12 @@ export default function App() {
               <Stack.Screen name='paymentSuccess' component={PaymentSuccess}/>
               <Stack.Screen name='paymentDetails' component={PaymentDetails}/>
               <Stack.Screen name='payment' component={Payment}/>
-              <Stack.Screen name='welcome' component={WelcomeScreen}/>
-              <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
+               <Stack.Screen name='/' component={EditProfile}></Stack.Screen>
+              <Stack.Screen name='history' component={History}/>
+              <Stack.Screen name='explore' component={Explore}/>
+               <Stack.Screen name='welcome' component={WelcomeScreen}/> 
+              <Stack.Screen name='home' component={Categories}></Stack.Screen>
+               <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
               <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
               <Stack.Screen name='login' component={LoginScreen}/>
@@ -44,7 +52,7 @@ export default function App() {
               <Stack.Screen name='trackingParking' component={TrackingParking}></Stack.Screen>
               <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
               <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
-              <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen>
+              <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen> 
               </Stack.Navigator>
         </NavigationContainer>
       </Provider>
