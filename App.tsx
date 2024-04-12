@@ -18,6 +18,7 @@ import Categories from './screens/Home';
 import Explore from './screens/Explore';
 import History from './screens/History';
 import EditProfile from './screens/EditProfile';
+import Profile from './screens/Profile';
 
 const Stack = createNativeStackNavigator()
 
@@ -27,7 +28,8 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-                <Stack.Screen name='/' component={EditProfile}></Stack.Screen>
+              <Stack.Screen name='/' component={Profile}/> 
+                <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
               <Stack.Screen name='history' component={History}/>
               <Stack.Screen name='explore' component={Explore}/>
                <Stack.Screen name='welcome' component={WelcomeScreen}/> 
@@ -43,6 +45,7 @@ export default function App() {
               <Stack.Screen name='detailParking' component={DetailParking}></Stack.Screen>
               <Stack.Screen name='detailCategory' component={DetailCategory}></Stack.Screen>
               <Stack.Screen name='userProfile' component={UserProfile}></Stack.Screen> 
+              
               </Stack.Navigator>
         </NavigationContainer>
       </Provider>
