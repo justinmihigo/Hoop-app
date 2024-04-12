@@ -14,6 +14,11 @@ import DetailParking from './screens/DetailsParking';
 import TrackingParking from './screens/TrackingParking';
 import ForgetPassword from './screens/ForgetPassword';
 import ConfirmForgetPassword from "./screens/ConfirmForgetPassword"
+import Payment from './screens/Payment';
+import PaymentDetails from './screens/PaymentDetails';
+import PaymentSuccess from './screens/PaymentSuccess';
+import DetailHistory from './screens/DetailHistory';
+import Notifications from './screens/Notifications';
 
 const Stack = createNativeStackNavigator()
 
@@ -23,7 +28,12 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-              <Stack.Screen name='/' component={WelcomeScreen}/>
+              <Stack.Screen name='notifications' component={Notifications}/>
+              <Stack.Screen name='detailHistory' component={DetailHistory}/>
+              <Stack.Screen name='paymentSuccess' component={PaymentSuccess}/>
+              <Stack.Screen name='paymentDetails' component={PaymentDetails}/>
+              <Stack.Screen name='payment' component={Payment}/>
+              <Stack.Screen name='welcome' component={WelcomeScreen}/>
               <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
               <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
