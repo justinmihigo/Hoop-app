@@ -34,26 +34,18 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-<<<<<<< HEAD
-              <Stack.Screen name='parlingRoute' component={ParkingRoute}/> 
+              <Stack.Screen name='/' component={WelcomeScreen}/> 
+              <Stack.Screen name='parking' component={ParkingRoute}/>
               <Stack.Screen name='profile' component={Profile}/> 
-              <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
-              <Stack.Screen name='history' component={History}/>
-              <Stack.Screen name='explore' component={Explore}/>
-               <Stack.Screen name='/' component={WelcomeScreen}/> 
-=======
-              <Stack.Screen name='/' component={Profile}/> 
                <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
               <Stack.Screen name='notifications' component={Notifications}/>
               <Stack.Screen name='detailHistory' component={DetailHistory}/>
               <Stack.Screen name='paymentSuccess' component={PaymentSuccess}/>
               <Stack.Screen name='paymentDetails' component={PaymentDetails}/>
               <Stack.Screen name='payment' component={Payment}/>
-              <Stack.Screen name='/' component={EditProfile}></Stack.Screen>
+              <Stack.Screen name='editprofile' component={EditProfile}></Stack.Screen>
               <Stack.Screen name='history' component={History}/>
               <Stack.Screen name='explore' component={Explore}/>
-              <Stack.Screen name='welcome' component={WelcomeScreen}/> 
->>>>>>> develop
               <Stack.Screen name='home' component={Categories}></Stack.Screen>
                <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
