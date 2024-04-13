@@ -182,44 +182,7 @@ const styles = StyleSheet.create({
         
     },
     
-    // parkingContainer:{
-    //     height:350,
-    //     // backgroundColor:"red",
-    //     width:"100%",
-    //     display:"flex",
-    //     flexDirection:"column",
-    //     justifyContent:"space-around",
-    //     padding:19,
-       
     
-        
-    
-
-    // },
-
-    // parkingcard:{
-    //     backgroundColor:"#FFFFFF",
-    //     height:126,
-    //     width:370,
-    //     borderRadius:15,
-    //     gap:7,
-
-        
-
-
-    // },
-
-
-    // txtCategogly2:{
-    //     fontSize:20,
-    //     fontFamily:"AvenirBord",
-    //     fontWeight:"normal",
-    //     marginLeft:45,
-    //     color:"#0A1124"
-
-    // },
-    
-
     container: {
         flexDirection: "column",
         flexWrap: 'wrap',
