@@ -25,6 +25,7 @@ import History from './screens/History';
 import EditProfile from './screens/EditProfile';
 import Profile from './screens/Profile';
 import ParkingRoute from './screens/ParkingRoute';
+import BookDetail from './screens/BookDetail';
 
 const Stack = createNativeStackNavigator()
 
@@ -34,7 +35,8 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-              <Stack.Screen name='/' component={WelcomeScreen}/> 
+              <Stack.Screen name='/' component={BookDetail}/>
+              <Stack.Screen name='welcome' component={WelcomeScreen}/> 
               <Stack.Screen name='parking' component={ParkingRoute}/>
               <Stack.Screen name='profile' component={Profile}/> 
                <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
