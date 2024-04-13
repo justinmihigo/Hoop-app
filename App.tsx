@@ -24,6 +24,7 @@ import Explore from './screens/Explore';
 import History from './screens/History';
 import EditProfile from './screens/EditProfile';
 import Profile from './screens/Profile';
+import ParkingRoute from './screens/ParkingRoute';
 
 const Stack = createNativeStackNavigator()
 
@@ -33,6 +34,14 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
+<<<<<<< HEAD
+              <Stack.Screen name='parlingRoute' component={ParkingRoute}/> 
+              <Stack.Screen name='profile' component={Profile}/> 
+              <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
+              <Stack.Screen name='history' component={History}/>
+              <Stack.Screen name='explore' component={Explore}/>
+               <Stack.Screen name='/' component={WelcomeScreen}/> 
+=======
               <Stack.Screen name='/' component={Profile}/> 
                <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>
               <Stack.Screen name='notifications' component={Notifications}/>
@@ -44,6 +53,7 @@ export default function App() {
               <Stack.Screen name='history' component={History}/>
               <Stack.Screen name='explore' component={Explore}/>
               <Stack.Screen name='welcome' component={WelcomeScreen}/> 
+>>>>>>> develop
               <Stack.Screen name='home' component={Categories}></Stack.Screen>
                <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
