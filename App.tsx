@@ -28,6 +28,7 @@ import ParkingRoute from './screens/ParkingRoute';
 import BookDetail from './screens/BookDetail';
 import ChoosePlanPro from './screens/ChoosePlanPro';
 import UpgradePro from './screens/Upgradepro';
+import ChooseSpace from './screens/ChooseSpace';
 
 const Stack = createNativeStackNavigator()
 
@@ -37,7 +38,8 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-              <Stack.Screen name='/' component={UpgradePro}/> 
+              <Stack.Screen name='chooseSpace' component={ChooseSpace}/> 
+              <Stack.Screen name='upgradePro' component={UpgradePro}/> 
               <Stack.Screen name='choosePlanPro' component={ChoosePlanPro}/> 
               <Stack.Screen name='bookdetails' component={BookDetail}/>
               <Stack.Screen name='welcome' component={WelcomeScreen}/> 
