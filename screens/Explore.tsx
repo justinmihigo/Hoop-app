@@ -1,7 +1,7 @@
 import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, TextInput } from "react-native";
 import { faAngleLeft, faFilter, faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, Link } from "@react-navigation/native";
 import React from "react";
 import { useFonts } from "expo-font";
 const Explore: React.FC = () => {
@@ -58,7 +58,7 @@ const Explore: React.FC = () => {
 
             <View style={{ flexDirection: "column", gap: 40, alignItems: "flex-start", marginTop: 50, marginBottom: 30, }}>
 
-                <Text style={{ fontFamily: 'Avenirroman', fontSize: 22,marginLeft:100 }}>Explore</Text>
+                <Text style={{ fontFamily: 'Avenirroman', fontSize: 22,marginLeft:100 }}><Link to={'/history'}>Explore</Link></Text>
 
                 <TextInput style={styles.inputstyle}>
                         <Image source={require("../assets/Search.png")}></Image>

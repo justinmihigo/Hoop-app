@@ -180,7 +180,7 @@ const ChooseSpace: React.FC = () => {
             </GestureHandlerRootView>
 
 
-            <TouchableOpacity style={{ width: '80%', }}>
+            <TouchableOpacity style={{ width: '80%', }} onPress={()=>navigation.navigate('book' as never)}>
                 <ButtonWithProps textColor="white" color="black" title="Book Space" />
             </TouchableOpacity>
         </SafeAreaView>

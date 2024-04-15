@@ -2,7 +2,7 @@
 import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity } from "react-native";
 import { faAngleLeft, faClock, faFilter, faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, Link } from "@react-navigation/native";
 import React from "react";
 import { useFonts } from "expo-font";
 import { faClockFour } from "@fortawesome/free-regular-svg-icons";
@@ -24,7 +24,7 @@ const Book: React.FC = () => {
                 <Pressable style={styles.back} onPress={() => navigation.goBack()}>
                     <FontAwesomeIcon icon={faAngleLeft} />
                 </Pressable>
-                <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 ,marginLeft:50}}>Booking</Text>
+                <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 ,marginLeft:50}}><Link to={'/bookdetails'}>Booking</Link></Text>
             </View>
 
             <View style={{padding:30,gap:30}}>
@@ -113,7 +113,6 @@ const Book: React.FC = () => {
             <View style={{display:"flex",flexDirection:"row",gap:60,alignItems:"center"}}>
                 <Text style={{fontSize:24,fontWeight:"bold",marginBottom:45}}>$35,00</Text>
                 <TouchableOpacity style={{width: 197,height:54,position:"relative",marginBottom:60}}>
-        
                     <ButtonWithProps textColor="white" color="black" title="Book Now"/>
                 </TouchableOpacity>
 

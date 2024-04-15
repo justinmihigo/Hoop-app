@@ -2,7 +2,7 @@
 import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity } from "react-native";
 import { faAngleLeft, faClock, faFilter, faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, Link} from "@react-navigation/native";
 import React from "react";
 import { useFonts } from "expo-font";
 import { faClockFour } from "@fortawesome/free-regular-svg-icons";
@@ -24,7 +24,7 @@ const BookDetail: React.FC = () => {
                 <Pressable style={styles.back} onPress={() => navigation.goBack()}>
                     <FontAwesomeIcon icon={faAngleLeft} />
                 </Pressable>
-                <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 }}>Book Details</Text>
+                <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 }}><Link to={"/payment"}>Book Details</Link></Text>
             </View>
             <View style={{gap:30}}>
                 <View>

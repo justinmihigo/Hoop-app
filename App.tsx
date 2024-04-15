@@ -39,15 +39,15 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
+              <Stack.Screen name='/' component={WelcomeScreen}/>
               <Stack.Screen name='chooseSpace' component={ChooseSpace}/> 
               <Stack.Screen name='upgradePro' component={UpgradePro}/> 
-              <Stack.Screen name='/' component={Book}/>
+              <Stack.Screen name='book' component={Book}/>
               <Stack.Screen name='showmap' component={ShowMaps}/>
               <Stack.Screen name='otpscreen' component={OtpScreen}></Stack.Screen>
               <Stack.Screen name='upgradepro' component={UpgradePro}/> 
               <Stack.Screen name='choosePlanPro' component={ChoosePlanPro}/> 
               <Stack.Screen name='bookdetails' component={BookDetail}/>
-              <Stack.Screen name='welcome' component={WelcomeScreen}/> 
               <Stack.Screen name='parking' component={ParkingRoute}/>
               <Stack.Screen name='profile' component={Profile}/> 
                <Stack.Screen name='editProfile' component={EditProfile}></Stack.Screen>

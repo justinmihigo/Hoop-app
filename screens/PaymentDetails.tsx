@@ -115,7 +115,7 @@ const PaymentDetails: React.FC = () => {
                     </View>
                     </View>
                 </View>
-                <TouchableOpacity style={{ width: '80%' }}>
+                <TouchableOpacity style={{ width: '80%' }} onPress={()=> navigation.navigate('paymentSuccess' as never)}>
                     <ButtonWithProps textColor="white" color="black" title="Pay Now" />
                 </TouchableOpacity>
             </SafeAreaView>

@@ -59,7 +59,7 @@ const DetailParking: React.FC = () => {
             <LinearGradient colors={['rgba(255,255,255,0.8)', 'rgba(255,255,255,0.7)']} start={{x:0, y:0}} end={{x:0, y:1}}
              style={{ position:'relative', bottom: 5,height: 100, width:'100%', alignItems:"center", justifyContent:"center", backgroundColor:'transparent'}}>
             <View>
-            <TouchableOpacity style={{width: 200}}>
+            <TouchableOpacity style={{width: 200}} onPress={()=>navigation.navigate('trackingParking' as never)}>
                 <ButtonWithProps textColor="white" color="black" title="Book Now"/>
             </TouchableOpacity>
             </View>

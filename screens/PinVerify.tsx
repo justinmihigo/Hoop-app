@@ -76,7 +76,7 @@ const PinVerify: React.FC = () => {
                                 borderColor: '#999',
                             }
                         }
-                        onCodeFilled={(code => alert(code))}
+                        onCodeFilled={(code => navigation.navigate('home' as never))}
                     />
 
                 </View>

@@ -88,7 +88,7 @@ const TrackingParking: React.FC = () => {
                         </View>
                         <View style={{width:'100%', height:100, marginTop:20, backgroundColor:"#F4F4FA", borderRadius: 20, justifyContent: 'center', alignItems:'center',gap:10 ,flexDirection:'row-reverse'}}>
                             <View style={{width:'60%'}}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=>navigation.navigate('chooseSpace' as never)}>
                                     <ButtonWithProps title="Start now" color="black" textColor="white"/>
                                 </TouchableOpacity>
                             </View>
