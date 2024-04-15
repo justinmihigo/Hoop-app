@@ -2,7 +2,7 @@ import { View, Text,StyleSheet,Image,TextInput,ImageBackground ,TouchableOpacity
 import React from 'react'
 import { useFonts } from 'expo-font';
 import CategoryCard from '../components/CategoriesComponent';
-
+import { useNavigation, Link } from '@react-navigation/native';
 interface Category {
     id: number;
     name: string;
@@ -38,7 +38,7 @@ interface Category {
 
                 <View style={styles.textandNotfication}>
                     <View style={styles.TextContain}>
-                        <Text style={styles. header}>Hola, Diane👋🏻</Text>
+                        <Text style={styles. header}><Link to={'/profile'}>Hola, Diane</Link>👋🏻</Text>
                         <Text style={styles.Textt}>Find an easy parking spot</Text>
                     </View>
                     <View style={{borderRadius:10}}>
@@ -61,10 +61,9 @@ interface Category {
      
         <View style={styles.BottomContainer}>
             <View style={styles.Categogly}>
-                <Text style={styles.txtCategogly}>Categori</Text>
+                <Text style={styles.txtCategogly}><Link to={'/explore'}>Category</Link></Text>
             </View>
           
-
             <View style={styles.container}>
              {categories.map(category => (
             <CategoryCard

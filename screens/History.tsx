@@ -1,7 +1,7 @@
 import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, TextInput } from "react-native";
 import { faAngleLeft, faFilter, faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, Link } from "@react-navigation/native";
 import React from "react";
 import { useFonts } from "expo-font";
 const History: React.FC = () => {
@@ -81,7 +81,7 @@ const History: React.FC = () => {
             </View>
             <View style={{ width: '80%', flexDirection: 'row', alignItems: 'center', gap: 30, marginHorizontal: 20 }}>
                 <Text style={{ textAlign: 'center', fontFamily: 'Avenir', lineHeight: 30, fontSize: 20, color: "#2D2D2D" }}>
-                Recently
+                <Link to={'/detailParking'}>Recently</Link>
                 </Text>
             </View>
             

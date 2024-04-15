@@ -2,7 +2,7 @@ import { View, Text,StyleSheet,Image,TextInput,ImageBackground ,TouchableOpacity
 import React from 'react'
 import { useFonts } from 'expo-font';
 import ProfileComponent from '../components/ProfileComponent';
-
+import {Link} from "@react-navigation/native"
 interface Category {
     id: number;
     name: string;
@@ -75,9 +75,8 @@ interface Category {
 
                 <View >
                     <View>
-                        <Text style={styles. header}>Profile</Text>
+                        <Text style={styles. header}><Link to={'/upgradepro'}>Profile</Link ></Text>
                     </View>
-                    
                 </View>
 
                 <View style={{display:"flex", flexDirection:"row",gap:140}}>

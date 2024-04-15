@@ -2,7 +2,7 @@
 import React from 'react'
 import { useFonts } from 'expo-font';
 import { useLayoutEffect } from 'react'
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Image } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Image, } from 'react-native'
 import Button from '../components/buttons';
 import { useNavigation,Link } from '@react-navigation/native';
 
@@ -27,10 +27,10 @@ if (!fontLoaded) return null;
         <Text style={styles.text}>                email.</Text>
       </View>
       <TouchableOpacity style ={styles.buttonn}>
-        <Text style={styles.buttonText}>Open email app</Text>
+        <Text style={styles.buttonText}><Link to={"/otpscreen"}>Open email app</Link></Text>
       </TouchableOpacity>
       <Text style={styles.skiptext}>
-      Skip I’ll confirm later
+      <Link to={"/pinverify"}>Skip I’ll confirm later</Link> 
       </Text>
       <View style={styles.onbottonText}>
         <Text style={styles.bottonText}>

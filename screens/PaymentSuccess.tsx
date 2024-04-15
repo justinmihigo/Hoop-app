@@ -51,7 +51,7 @@ const PaymentSuccess: React.FC = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={{width:"100%", justifyContent: "center", alignItems:"center"}}>
-                    <TouchableOpacity style={{ width: '80%' }}>
+                    <TouchableOpacity style={{ width: '80%' }} onPress={()=>navigation.navigate('home' as never)}>
                         <ButtonWithProps title="Back to Home" color={"black"} textColor="#fff"></ButtonWithProps>
                     </TouchableOpacity>
                 </View>
