@@ -29,6 +29,7 @@ import BookDetail from './screens/BookDetail';
 import ChoosePlanPro from './screens/ChoosePlanPro';
 import UpgradePro from './screens/Upgradepro';
 import ShowMaps from './screens/ShowMaps';
+import Book from './screens/Book';
 
 const Stack = createNativeStackNavigator()
 
@@ -38,7 +39,8 @@ export default function App() {
       <Provider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown:false}}>
-              <Stack.Screen name='/' component={ShowMaps}/>
+              <Stack.Screen name='/' component={Book}/>
+              <Stack.Screen name='showmap' component={ShowMaps}/>
               <Stack.Screen name='otpscreen' component={OtpScreen}></Stack.Screen>
               <Stack.Screen name='upgradepro' component={UpgradePro}/> 
               <Stack.Screen name='choosePlanPro' component={ChoosePlanPro}/> 

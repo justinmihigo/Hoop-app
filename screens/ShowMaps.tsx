@@ -57,7 +57,10 @@ const ShowMaps: React.FC = () => {
                 
             </View>
 
-            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'flex-start', gap: 100, marginLeft: 50, alignItems: "flex-start", marginTop: 50, marginBottom: 30, }}>
+            <View style={{ flexDirection: 'row', width: '100%',
+             justifyContent: 'flex-start', gap: 100, marginLeft: 50,
+              alignItems: "flex-start", marginTop: 50, marginBottom: 30, }}>
+                
                 <Pressable style={[styles.back, other.position]} onPress={() => navigation.goBack()}>
                     <FontAwesomeIcon icon={faAngleLeft} />
                 </Pressable>
