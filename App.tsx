@@ -29,7 +29,8 @@ import BookDetail from './screens/BookDetail';
 import ChoosePlanPro from './screens/ChoosePlanPro';
 import UpgradePro from './screens/Upgradepro';
 import ChooseSpace from './screens/ChooseSpace';
-
+import ShowMaps from './screens/ShowMaps';
+import Book from './screens/Book';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -40,6 +41,10 @@ export default function App() {
               <Stack.Navigator screenOptions={{headerShown:false}}>
               <Stack.Screen name='chooseSpace' component={ChooseSpace}/> 
               <Stack.Screen name='upgradePro' component={UpgradePro}/> 
+              <Stack.Screen name='/' component={Book}/>
+              <Stack.Screen name='showmap' component={ShowMaps}/>
+              <Stack.Screen name='otpscreen' component={OtpScreen}></Stack.Screen>
+              <Stack.Screen name='upgradepro' component={UpgradePro}/> 
               <Stack.Screen name='choosePlanPro' component={ChoosePlanPro}/> 
               <Stack.Screen name='bookdetails' component={BookDetail}/>
               <Stack.Screen name='welcome' component={WelcomeScreen}/> 
@@ -57,7 +62,6 @@ export default function App() {
               <Stack.Screen name='home' component={Categories}></Stack.Screen>
                <Stack.Screen name='comfirm-forger' component={ConfirmForgetPassword}/>
               <Stack.Screen name='pinverify' component={PinVerify}></Stack.Screen>
-              <Stack.Screen name='otpScreen' component={OtpScreen}></Stack.Screen>
               <Stack.Screen name='login' component={LoginScreen}/>
               <Stack.Screen name='loginbyemail' component={LoginByEmail}/>
               <Stack.Screen name='ForgetPass' component={ForgetPassword}/>
@@ -73,10 +77,6 @@ export default function App() {
       
   );
 }
-
-//navigationn container
-//naviagtor
-//screens
 
 
 const styles = StyleSheet.create({
