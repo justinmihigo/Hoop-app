@@ -1,13 +1,11 @@
-import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, Dimensions } from "react-native";
-import { faAngleLeft, faCircleExclamation, faClock, faFilter, faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, ScrollView, Dimensions } from "react-native";
+import { faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import MapView, { Marker } from "react-native-maps"
 import * as Location from "expo-location"
 import { useFonts } from "expo-font";
-import ButtonWithProps from "../components/buttonWithProps";
-import { faClockFour } from "@fortawesome/free-regular-svg-icons";
 const ShowMaps: React.FC = () => {
     const[mapRegion, setMapRegion]= useState({
         latitude: 37.78825,
@@ -98,8 +96,6 @@ const ShowMaps: React.FC = () => {
                         </View>
 
                         <View>
-                        <Image style={{height:92,width:120}} source={require("../assets/Rectangle 76 (1).png")}></Image>
-                            
                             <Image style={{height:92,width:120}} source={require("../assets/Rectangle 76 (1).png")}></Image>
                         </View>
 
