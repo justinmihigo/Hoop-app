@@ -83,7 +83,7 @@ interface Category {
 
                 
 
-             <View style={{display:"flex",flexDirection:"row",gap:20}}>
+             <View style={{display:"flex",flexDirection:"row",gap:20,alignItems:"center",justifyContent:"space-around",width:"100%"}}>
 
                         <View >
                           <Image source={require("../assets/Ellipse 19.png")}></Image>
@@ -91,17 +91,24 @@ interface Category {
 
 
                         <View style={{display:"flex",flexDirection:"column"}}>
-                            <Text style={{color:"#FFFFFF",fontSize:14,fontFamily:"Avenir"}}>Welcome</Text>
-                            <Text style={{color:"white",fontSize:20,fontFamily:"Avenir"}}>Diane</Text>
+                            <Link to={("/editProfile")}><Text style={{color:"#FFFFFF",fontSize:14,fontFamily:"Avenir"}}>Welcome</Text></Link>
+                            <Link to={("/editProfile")}><Text style={{color:"white",fontSize:20,fontFamily:"Avenir"}}>Diane</Text></Link>
                        </View>
 
-             </View>
 
              <TouchableOpacity>
                     <View style={{borderRadius:10}}>
                         <Image source={require("../assets/profilenavv.png")}></Image>
                     </View>
                     </TouchableOpacity>
+
+             </View>
+{/* 
+             <TouchableOpacity>
+                    <View style={{borderRadius:10}}>
+                        <Image source={require("../assets/profilenavv.png")}></Image>
+                    </View>
+                    </TouchableOpacity> */}
 
                     </View>
 

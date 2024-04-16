@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
     inner: {
         color: "white",
         fontFamily:'Avenir',
+        fontSize:20
     } ,
     innerr: {
         color: "#2D2D2D",

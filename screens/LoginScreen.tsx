@@ -51,11 +51,11 @@ export default function LoginSCreen() {
               <View style={styles.container}>
                   
                    <View style={styles.countryPicker}>
-                      <Picker
+                      {/* <Picker
                           ref={pickerRef as any}
                             selectedValue={selectedCountryCode}
                             onValueChange={(itemValue) => setSelectedCountryCode(itemValue)}
-                          style={{ height: 50, width: 120, fontFamily:"Avenir" }}
+                          style={{width: 50, fontFamily:"Avenir",position:"relative" }}
                           numberOfLines={1}
                           
                         >
@@ -64,9 +64,9 @@ export default function LoginSCreen() {
                             <Picker.Item label="+250 (Rwanda)" value="+250" />
                             <Picker.Item label="+256 (Burundi)" value="+256" />
                             
-                      </Picker> 
+                      </Picker>  */}
                       
-                       <TextInput placeholder='Phone Number' style={styles.input}>
+                       <TextInput placeholder='+62' style={styles.input}>
                       
               
                   </TextInput>
@@ -74,7 +74,10 @@ export default function LoginSCreen() {
                   
                   
                  
-                  <TextInput placeholder='Phone number' style={styles.input}></TextInput>
+                  <TextInput placeholder='Password' style={styles.input}>
+                    
+
+                  </TextInput>
                   <Text style={styles.forgot}> <Link to={"/ForgetPass"}><Text>Forgot password ? </Text></Link><Text style={{ color: "red"}}>Retrieve</Text></Text>
                   
               </View>
@@ -102,7 +105,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#130F26',
         alignItems: 'center',
-        flexDirection:"column"
+        flexDirection:"column",
+        height:60,
     },
 
     header: {
@@ -148,6 +152,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: "white",
         fontFamily:'Avenir',
+        fontSize:18,
+        color:"#2D2D2D",
+        height:60,
+
     },
 
     btn: {
@@ -156,12 +164,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 13,
-        borderRadius:15
+        borderRadius:15,
+        height:60,
+        
     },
 
     inner: {
         color: "white",
         fontFamily:'Avenir',
+        fontSize:20
     } ,
 
     actions: {

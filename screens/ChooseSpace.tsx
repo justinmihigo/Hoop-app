@@ -97,8 +97,8 @@ const ChooseSpace: React.FC = () => {
                 </Pressable>
                 <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 }}>Choose Space</Text>
             </View>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={{ flexDirection: "row", gap: 20, marginLeft: 40, overflow: 'scroll' }}>
+            <ScrollView  style={{}}horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={{ flexDirection: "row", gap: 20, marginLeft: 40, overflow: 'scroll',height:30 }}>
                     <View style={{ backgroundColor: "#F43939", padding: 5, paddingHorizontal: 10, borderRadius: 15, justifyContent: "center" }}>
                         <Text style={{ fontFamily: "Avenir", color: "white" }}>1st Floor</Text>
                     </View>
@@ -113,7 +113,7 @@ const ChooseSpace: React.FC = () => {
                     </View>
                 </View>
             </ScrollView>
-            <GestureHandlerRootView>
+            <GestureHandlerRootView style={{marginBottom:150}}>
                 <View style={{ width: '100%', flexDirection: "row", gap: 20, justifyContent: "flex-start", alignItems: "flex-start", margin: 20, marginLeft: 150 }}>
                     <View style={{
                         width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb"

@@ -61,8 +61,8 @@ const Explore: React.FC = () => {
                 <Text style={{ fontFamily: 'Avenirroman', fontSize: 22,marginLeft:100 }}><Link to={'/history'}>Explore</Link></Text>
 
                 <TextInput style={styles.inputstyle}>
-                        <Image source={require("../assets/Search.png")}></Image>
-                        <Text style={{color:"#696969 | rgb(105,105,105)",fontSize:16}}>Search</Text>
+                        <Image source={require("../assets/Group 253.png")}></Image>
+                        <Text style={{color:"#696969 | rgb(105,105,105)",fontSize:16}}>     Search</Text>
                     </TextInput>
             
             </View>
@@ -105,6 +105,9 @@ const styles = StyleSheet.create({
         height:55,
         width:311,
         borderRadius:15,
+        display:"flex",
+        flexDirection:"row",
+        padding:15
 
     }
 })

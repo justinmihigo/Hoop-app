@@ -33,10 +33,12 @@ export default function EditProfile() {
                         <Text style={styles.innerr}>Edit Profile</Text>
                     </View>
                     <TouchableOpacity>
+                    
 
                     <View style={{marginLeft:150}}>
                        <Image style={{height:86,width:86}}source={require("../assets/editprofile.png")}></Image>
                     </View>
+        
                     </TouchableOpacity>
 
                     <View style={styles.textt}>

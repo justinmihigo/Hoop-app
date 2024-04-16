@@ -70,8 +70,8 @@ const History: React.FC = () => {
                 <View style={{display:"flex",flexDirection:"row",gap:15}}>
 
                 <TextInput style={styles.inputstyle}>
-                        <Image source={require("../assets/Search.png")}></Image>
-                        <Text style={{color:"#696969 | rgb(105,105,105)",fontSize:16}}>Search</Text>
+                        <Image source={require("../assets/Group 253.png")}></Image>
+                        <Text style={{color:"#696969 | rgb(105,105,105)",fontSize:16}}>     Search</Text>
                     </TextInput>
 
                     <Image source ={require("../assets/historyicon.png")}></Image>
@@ -122,6 +122,11 @@ const styles = StyleSheet.create({
         height:55,
         width:241,
         borderRadius:15,
+        marginLeft:-25,
+
+    display:"flex",
+    flexDirection:"row",
+    padding:15
 
     }
 })

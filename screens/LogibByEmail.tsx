@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Pressable } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Pressable,Image } from 'react-native'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigation,Link } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -37,10 +37,19 @@ export default function LoginByEmail() {
                   
                   
                  <TextInput placeholder='Email' style={styles.input}>
+                    <Text style={{fontSize:18,fontFamily:"Avenir"}}>Email</Text>
                       
               
                   </TextInput>
-                  <TextInput placeholder='Password' style={styles.input}></TextInput>
+                  <TextInput placeholder='Password' style={styles.input}>
+                     {/* <Image style={{marginLeft:10}}source={require("../assets/Group (2).png")}></Image> */}
+                  
+                  <Text style={{fontSize:18,fontFamily:"Avenir"}}>Password</Text>
+                 
+
+
+                  
+                  </TextInput>
                   <Text style={styles.forgot}><Link to={"/ForgetPass"}><Text>Forgot password ?</Text></Link> <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
                   
               </View>
@@ -109,11 +118,16 @@ const styles = StyleSheet.create({
         
     },
     input: {
+        display:"flex",
+        flexDirection:"row",
+        // justifyContent:"space-between",
         width: "100%",
         padding: 13,
         borderRadius: 15,
         backgroundColor: "white",
         fontFamily:"Avenir",
+        height:60,
+        // width:311
     },
 
     btn: {
@@ -122,11 +136,14 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 13,
-        borderRadius:15
+        borderRadius:15,
+        height:60
     },
 
     inner: {
         color: "white",
+        fontSize:20,
+        fontFamily:"Avenir"
     } ,
 
     actions: {
