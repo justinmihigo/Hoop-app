@@ -1,28 +1,24 @@
-import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, TextInput} from "react-native";
 import { faAngleLeft, faClock, faFilter, faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
-import { Table, Row, Rows, Col, Cell } from "react-native-table-component"
-import { PanGestureHandler, Gesture, GestureHandlerRootView, GestureDetector } from "react-native-gesture-handler";
+import {GestureDetector, Gesture, GestureHandlerRootView} from "react-native-gesture-handler"
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withTiming,
-    useAnimatedProps,
-} from 'react-native-reanimated';
-import React from "react";
-import { DraxProvider, DraxView } from 'react-native-drax';
+    withTiming,} from 'react-native-reanimated';
+import React, { ReactNode, useState } from "react";
 import { useFonts } from "expo-font";
-import { faClockFour } from "@fortawesome/free-regular-svg-icons";
 import ButtonWithProps from "../components/buttonWithProps";
-import { LinearGradient } from "expo-linear-gradient"
-const ChooseSpace: React.FC = () => {
+interface DraggableItemProps {
+    children: ReactNode;
+}
+const DraggableItem: React.FC<DraggableItemProps> = ({ children }) => {
     const isGestureActive = useSharedValue(false);
     const onTranslate = useSharedValue(0);
-    const translateY = useSharedValue(0);
     const offset = useSharedValue({ x: 0, y: 0 });
     const start = useSharedValue({ x: 0, y: 0 });
-    const position = useSharedValue({ x: 0, y: 0 });
+    const bg = useSharedValue({ color: 'none', padding: 0, paddingHorizontal: 0, borderRadius: 0 })
     const animatedStyle = useAnimatedStyle(() => {
         return {
             transform: [
@@ -33,45 +29,53 @@ const ChooseSpace: React.FC = () => {
                     translateY: offset.value.y,
                 },
             ],
-        }
+            backgroundColor: bg.value.color,
+            padding: bg.value.padding,
+            paddingHorizontal: bg.value.paddingHorizontal,
+            borderRadius: bg.value.borderRadius,
+        };
     });
-    const dragGesture = Gesture.Pan().onStart((_e) => {
+
+    const dragGesture = Gesture.Pan().onStart((_e,) => {
+        isGestureActive.value = true;
         onTranslate.value = withTiming(0);
+        bg.value = {
+            color: '#F43939',
+            padding: -4,
+            paddingHorizontal: 5,
+            borderRadius: 20,
+        }
     }).onUpdate((e) => {
         offset.value = {
             x: e.translationX + start.value.x,
             y: e.translationY + start.value.y,
         };
 
-    }
-    ).onEnd(() => {
+    }).onEnd(() => {
+        isGestureActive.value = false;
         start.value = {
             x: offset.value.x,
             y: offset.value.y,
+        };
+        bg.value = {
+            color: 'none',
+            padding: 0,
+            paddingHorizontal: 0,
+            borderRadius: 0,
         }
     });
-    const longPress = Gesture.LongPress().onStart((_e) => {
-        position.value = {
-            x: offset.value.x,
-            y: offset.value.y
-        };
-        onTranslate.value = withTiming(1);
-    }
-    )
-    //     return (
-    //         <Animated.View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    //             <GestureHandlerRootView>
-    //                 <GestureDetector gesture={dragGesture}>
-
-    //                     <Animated.View style={animatedStyle}>
-    //                         <Text>Justin mIhigo</Text>
-    //                     </Animated.View>
-    //                 </GestureDetector>
-
-    //             </GestureHandlerRootView>
-    //         </Animated.View>
-    //     )
-    // }
+    return (
+        <GestureHandlerRootView>
+            <GestureDetector gesture={dragGesture}>
+                <Animated.View style={[animatedStyle]}>
+                    {children}
+                </Animated.View>
+            </GestureDetector>
+        </GestureHandlerRootView>
+    );
+};
+  
+const ChooseSpace: React.FC = () => {
 
     const navigation = useNavigation();
     const [fontsLoaded] = useFonts({
@@ -113,81 +117,92 @@ const ChooseSpace: React.FC = () => {
                     </View>
                 </View>
             </ScrollView>
-            <GestureHandlerRootView style={{marginBottom:150}}>
-                <View style={{ width: '100%', flexDirection: "row", gap: 20, justifyContent: "flex-start", alignItems: "flex-start", margin: 20, marginLeft: 150 }}>
-                    <View style={{
-                        width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb"
-                    }}>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                            <GestureDetector gesture={dragGesture}>
-                                <Animated.View style={animatedStyle}>
-                                    <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
-                                </Animated.View>
-                            </GestureDetector>
-                            <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                            <View style={{ width: 97, borderRightWidth: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                            <Image source={require("../assets/car.png")} style={{ width: 80, transform: [{ rotate: '180deg' }], }} resizeMode="contain" />
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <View style={styles.carContainer}>
+                <View style={{
+                    width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb"
+                }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <DraggableItem>
                             <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
-                            <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                        </View>
+                        </DraggableItem>
+                        <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
                     </View>
-                    <View style={{ width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                            {/* <GestureDetector gesture={dragGesture}> */}
-                                {/* <Animated.View style={animatedStyle}> */}
-                                    <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
-                                {/* </Animated.View> */}
-                            {/* </GestureDetector> */}
-                            <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                            <View style={{ width: 97, borderRightWidth: 1, borderColor: "#bbb", flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                        <View style={{ width: 97, borderRightWidth: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                        <DraggableItem>
                             <Image source={require("../assets/car.png")} style={{ width: 80, transform: [{ rotate: '180deg' }], }} resizeMode="contain" />
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        </DraggableItem>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <DraggableItem>
                             <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
-                            <View style={{ width: 100, borderLeftWidth: 1, borderColor: "#bbb", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                        </View>
+                        </DraggableItem>
+                        <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
                     </View>
                 </View>
-                <View style={{ width: '100%', flexDirection: "row", gap: 20, justifyContent: "flex-start", alignItems: "flex-start", margin: 20, marginLeft: 150 }}>
-
-                    <View style={{ width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <View style={{ width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <DraggableItem>
                             <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
-                            <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                            <View style={{ width: 97, borderRightWidth: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                            <Image source={require("../assets/car.png")} style={{ width: 80, transform: [{ rotate: '180deg' }], }} resizeMode="contain" />
-                        </View>
+                        </DraggableItem>
+                        <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
                     </View>
-                    <View style={{ width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                            <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
-                            <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
-                            <View style={{ width: 97, borderRightWidth: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                        <View style={{ width: 97, borderRightWidth: 1, borderColor: "#bbb", flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                        <DraggableItem>
                             <Image source={require("../assets/car.png")} style={{ width: 80, transform: [{ rotate: '180deg' }], }} resizeMode="contain" />
-                        </View>
+                        </DraggableItem>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <DraggableItem>
+                            <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
+                        </DraggableItem>
+                        <View style={{ width: 100, borderLeftWidth: 1, borderColor: "#bbb", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
                     </View>
                 </View>
-            </GestureHandlerRootView>
+            </View>
+            <View style={styles.carContainer}>
+
+                <View style={{ width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <DraggableItem>
+                            <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
+                        </DraggableItem>
+                        <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                        <View style={{ width: 97, borderRightWidth: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                        <DraggableItem>
+                            <Image source={require("../assets/car.png")} style={{ width: 80, transform: [{ rotate: '180deg' }], }} resizeMode="contain" />
+                        </DraggableItem>
+                    </View>
+                </View>
+                <View style={{ width: 200, borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <DraggableItem>
+                            <Image source={require("../assets/car.png")} style={{ width: 80 }} resizeMode="contain" />
+                        </DraggableItem>
+                        <View style={{ width: 100, borderLeftWidth: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", borderWidth: 1, borderStyle: "dashed", borderColor: "#bbb" }}>
+                        <View style={{ width: 97, borderRightWidth: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}><Text style={{ padding: 5 }}>A-1</Text></View>
+                        <DraggableItem>
+                            <Image source={require("../assets/car.png")} style={{ width: 80, transform: [{ rotate: '180deg' }], }} resizeMode="contain" />
+                        </DraggableItem>
+                    </View>
+                </View>
+            </View>
 
 
-            <TouchableOpacity style={{ width: '80%', }} onPress={()=>navigation.navigate('book' as never)}>
+            <TouchableOpacity style={{ width: '80%', }} onPress={() => navigation.navigate('book' as never)}>
                 <ButtonWithProps textColor="white" color="black" title="Book Space" />
             </TouchableOpacity>
         </SafeAreaView>
 
     )
-}
+};
 export default ChooseSpace;
+
 
 const styles = StyleSheet.create({
     container: {
@@ -200,5 +215,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#EAEAF3',
+    },
+    carContainer:{
+        width: '100%', 
+        flexDirection: "row", 
+        gap: 20, 
+        justifyContent: "flex-start", 
+        alignItems: "flex-start", 
+        margin: 20, 
+        marginLeft: 120 
     }
 })
