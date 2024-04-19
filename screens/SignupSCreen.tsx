@@ -100,10 +100,13 @@ const styles = StyleSheet.create({
     },
     input: {
         width: "100%",
-        padding: 15,
-        borderRadius: 5,
+        padding: 20,
+        borderRadius: 15,
         backgroundColor: "white",
-        fontFamily:'Avenir'
+        fontFamily:'Avenir',
+        height:60,
+        fontSize:18
+
     
     },
 
@@ -113,12 +116,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 13,
-        borderRadius:5
+        borderRadius:15,
+        height:60,
+
     },
 
     inner: {
         color: "white",
         fontFamily:'Avenir',
+        fontSize:20
     } ,
 
     actions: {

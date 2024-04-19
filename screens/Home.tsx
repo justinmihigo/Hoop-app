@@ -47,9 +47,9 @@ interface Category {
                 </View>
 
                 <View style={styles.searchContainer}>
-                    <TextInput>
+                    <TextInput style={{display:"flex",flexDirection:"row",padding:10}}>
                         <Image source={require("../assets/Search.png")}></Image>
-                        <Text style={{color:"#696969 | rgb(105,105,105)",fontSize:16}}>Search</Text>
+                        <Text style={{color:"#696969 | rgb(105,105,105)",fontSize:16,position:"relative"}}>    Search</Text>
                     </TextInput>
                 </View>
             
@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
         height:55,
         width:311,
         borderRadius:15,
+
 
     },
     header:{

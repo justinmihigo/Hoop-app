@@ -268,7 +268,7 @@ const UpgradePro: React.FC = () => {
             
             
             <View>
-            <TouchableOpacity style={{width: 311,marginTop:-150,height:54}}>
+            <TouchableOpacity onPress={()=>navigation.navigate("choosePlanPro"as never)}style={{width: 311,marginTop:-150,height:54}}>
                 <ButtonWithProps textColor="white" color="#130F26" title="Choose a Plan"/>
             </TouchableOpacity>
             </View>

@@ -101,8 +101,8 @@ const ChooseSpace: React.FC = () => {
                 </Pressable>
                 <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 }}>Choose Space</Text>
             </View>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={{ flexDirection: "row", gap: 20, marginLeft: 40, overflow: 'scroll' }}>
+            <ScrollView  style={{}}horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={{ flexDirection: "row", gap: 20, marginLeft: 40, overflow: 'scroll',height:30 }}>
                     <View style={{ backgroundColor: "#F43939", padding: 5, paddingHorizontal: 10, borderRadius: 15, justifyContent: "center" }}>
                         <Text style={{ fontFamily: "Avenir", color: "white" }}>1st Floor</Text>
                     </View>
