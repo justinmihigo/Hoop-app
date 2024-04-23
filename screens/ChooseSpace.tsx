@@ -1,12 +1,14 @@
-import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, TextInput} from "react-native";
+import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, TextInput, Button } from "react-native";
 import { faAngleLeft, faClock, faFilter, faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
-import {GestureDetector, Gesture, GestureHandlerRootView} from "react-native-gesture-handler"
+import { GestureDetector, Gesture, GestureHandlerRootView } from "react-native-gesture-handler";
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withTiming,} from 'react-native-reanimated';
+    withTiming,
+} from 'react-native-reanimated';
 import React, { ReactNode, useState } from "react";
 import { useFonts } from "expo-font";
 import ButtonWithProps from "../components/buttonWithProps";
@@ -74,7 +76,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ children }) => {
         </GestureHandlerRootView>
     );
 };
-  
+
 const ChooseSpace: React.FC = () => {
 
     const navigation = useNavigation();
@@ -242,13 +244,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#EAEAF3',
     },
-    carContainer:{
-        width: '100%', 
-        flexDirection: "row", 
-        gap: 20, 
-        justifyContent: "flex-start", 
-        alignItems: "flex-start", 
-        margin: 20, 
-        marginLeft: 120 
+    carContainer: {
+        width: '100%',
+        flexDirection: "row",
+        gap: 20,
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        margin: 20,
+        marginLeft: 120
     }
 })
