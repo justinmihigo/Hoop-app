@@ -35,7 +35,6 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-
     <Provider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -74,7 +73,6 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-
   );
 }
 

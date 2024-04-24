@@ -243,13 +243,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#EAEAF3',
     },
-    carContainer: {
-        width: '100%',
-        flexDirection: "row",
-        gap: 20,
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-        margin: 20,
-        marginLeft: 120
+
+    carContainer:{
+        width: '100%', 
+        flexDirection: "row", 
+        gap: 20, 
+        justifyContent: "flex-start", 
+        alignItems: "flex-start", 
+        margin: 20, 
+        marginLeft: 120 
     }
 })
