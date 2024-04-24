@@ -30,15 +30,18 @@ export default function SignupSCreen() {
         } else if (password !== confirmPassword) {
             console.log("password do not match")
             error(`password do not match`);
-        } else {
+        } 
+        else if(email =='' || password == '') {
+                error("all fields no are required");
+        }
+        else {
             AppwriteService.createAccount({ email, password, phoneNumber })
                 .then((res) => {
                     if (res) {
                         successToast("success");
-                        navigation.navigate("home" as never);
+                        setInterval(()=>navigation.navigate("home" as never), 1000);
                     }
                 }).catch(e => console.log(e));
-            console.log(email);
         }
     }
 

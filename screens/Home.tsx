@@ -11,11 +11,11 @@ interface Category {
   }
 
   const Categories: React.FC = () => {
-    useEffect(() =>{
-        AppWriteService.getCurrentUser().then((user) => console.log(user)).catch((err) => console.log(err));
-    }
+    // useEffect(() =>{
+    //     AppWriteService.getCurrentUser().then((user) => console.log(user)).catch((err) => console.log(err)),[];
+    // }
     
-    )
+    // )
 
     const categories: Category[] = [
         { id: 1, name: 'Car', imageSource: require('../assets/acar.png') },
@@ -67,7 +67,7 @@ interface Category {
      
         <View style={styles.BottomContainer}>
             <View style={styles.Categogly}>
-                <Text style={[{fontFamily:"AvenirBold"},styles.txtCategogly]}><Link to={'/explore'}>Category</Link></Text>
+                <Text style={[{fontFamily:"Avenirbold"},styles.txtCategogly]}><Link to={'/explore'}>Category</Link></Text>
             </View>
           
             <View style={styles.container}>
@@ -81,7 +81,7 @@ interface Category {
             ))}
            </View>
 
-           <Text  style={[{fontFamily:"AvenirBold"},styles.txtCategogly2]}>Nearst Parking Spaces</Text>
+           <Text  style={[{fontFamily:"Avenirbold"},styles.txtCategogly2]}>Nearst Parking Spaces</Text>
 
            <View style={styles.parkingContainer}>
            

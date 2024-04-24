@@ -1,4 +1,4 @@
-import {ID, Account, Client } from "appwrite";
+import {ID, Account, Client, Databases } from "appwrite";
 import { AlertNotificationRoot, Dialog, ALERT_TYPE } from "react-native-alert-notification";
 type createAccountType={
     phoneNumber: string;
@@ -8,6 +8,11 @@ type createAccountType={
 type loginAccountType={
     email: string;
     password: string;
+}
+type usersSchema={
+    email: string;
+    password: string;
+    phoneNumber: string;
 }
 const appwriteClient = new Client();
 class AppwriteService{
@@ -41,8 +46,8 @@ class AppwriteService{
             return (
                 Dialog.show({
                     type: ALERT_TYPE.DANGER,
-                    title: 'Success',
-                    textBody: 'Congrats! this is dialog box success',
+                    title: 'Error',
+                    textBody: 'Incorrect assword ',
                     button: 'close',
                 })
             )
@@ -54,14 +59,12 @@ class AppwriteService{
             return response;
         } catch (error) {
             console.log(error);
-            return (
                 Dialog.show({
                     type: ALERT_TYPE.DANGER,
                     title: 'Success',
-                    textBody: 'Congrats! this is dialog box success',
+                    textBody: error as string,
                     button: 'close',
                 })
-            )
         }
     }
     async logout(){
@@ -71,6 +74,27 @@ class AppwriteService{
         } catch (error) {
             console.log(error);
             return 
+        }
+    }
+}
+export class AppwriteDb {
+    database;
+    constructor(){
+        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662616a78ae57dcf1889");
+        this.database = new Databases(appwriteClient);
+    }
+    async createDocument({email, password,phoneNumber}:createAccountType){
+        try {
+            const response = await this.database.createDocument("6628f7900748006a1b70","6628f79e8c2557b899fd",ID.unique(), {userId:ID.unique(), email, password, phoneNumber});
+            return response;
+        } catch (error) {
+            console.log(error);
+                Dialog.show({
+                    type: ALERT_TYPE.DANGER,
+                    title: 'Error',
+                    textBody: 'Error check your inputs',
+                    button: 'close',
+                })
         }
     }
 }

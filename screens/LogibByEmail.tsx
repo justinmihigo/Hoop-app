@@ -52,15 +52,8 @@ export default function LoginByEmail() {
             
                   
                   
-                 <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail}>
-                    <Text style={{fontSize:18,fontFamily:"Avenir"}}>Email</Text>
-                      
-              
-                  </TextInput>
-                  <TextInput placeholder='Password' style={styles.input} onChangeText={setPassword}>
-                     {/* <Image style={{marginLeft:10}}source={require("../assets/Group (2).png")}></Image> */}
-       
-                  </TextInput>
+                 <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail}/>                    
+                  <TextInput placeholder='Password' style={styles.input} onChangeText={setPassword} secureTextEntry/>
                   <Text style={styles.forgot}><Link to={"/ForgetPass"}><Text>Forgot password ?</Text></Link> <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
                   
               </View>
