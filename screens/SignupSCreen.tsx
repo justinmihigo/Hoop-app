@@ -1,55 +1,94 @@
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-
+import AppwriteService from "../src/appwrite/service";
+import { error, success, successToast } from '../src/appwrite/alert';
+import { ID } from 'appwrite';
+import { AlertNotificationRoot, Dialog, ALERT_TYPE } from 'react-native-alert-notification';
 export default function SignupSCreen() {
-
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const navigator = useNavigation()
-
+    const navigation=useNavigation();
     useLayoutEffect(() => {
-
         navigator.setOptions({
             headerShown: false
         })
-        
-    },[])
+    }, [])
+    const handleSignup = () => {
+        if (!validateEmail()) {
+            error("Enter a valid email address");
+            // Dialog.show({
+            //     type: ALERT_TYPE.DANGER,
+            //     title: 'Error',
+            //     textBody: "Enter a valid email address",
+            //     button: 'OK',
+            // });
+        } else if (password !== confirmPassword) {
+            console.log("password do not match")
+            error(`password do not match`);
+        } 
+        else if(email =='' || password == '') {
+                error("all fields no are required");
+        }
+        else {
+            AppwriteService.createAccount({ email, password, phoneNumber })
+                .then((res) => {
+                    if (res) {
+                        successToast("success");
+                        setInterval(()=>navigation.navigate("home" as never), 1000);
+                    }
+                }).catch(e => console.log(e));
+        }
+    }
+
+    // Function to validate email format
+    const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+
     const [fontLoaded] = useFonts({
         'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
         'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
         'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
     })
     if (!fontLoaded) return null;
+    console.log(email);
+    return (
+        <SafeAreaView style={styles.parent}>
+            
+            <ImageBackground source={require("../assets/Group243.png")} style={styles.header}>
+                <View style={{ padding: 20 }}>
+                    <Text style={styles.headerText}>Let’s start!!</Text>
+                </View>
+            </ImageBackground>
+            <View style={styles.content}>
+                <View style={styles.container}>
 
-  return (
-    <SafeAreaView style={styles.parent}>
-          <ImageBackground source={require("../assets/Group243.png")} style={styles.header}>
-              <View  style={{padding:20}}>
-              <Text style={styles.headerText}>Let’s start!!</Text>
-      </View>
-          </ImageBackground>
-          <View style={styles.content}>
-              <View style={styles.container}>
-                  
-                  <TextInput placeholder='Email' style={styles.input}></TextInput>
-                  <TextInput placeholder='Password' style={styles.input}></TextInput>
-                  <TextInput placeholder='Password Authentication' style={styles.input}></TextInput>
-                  <TextInput placeholder='Phone number' style={styles.input}></TextInput>
-                  
-              </View>
-              <View style={styles.actions}>
-                  
-                  <TouchableOpacity style={styles.btn}>
-                      <Text style={styles.inner}>Register</Text>
-                  </TouchableOpacity>
+                    <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail} />
+                    <TextInput placeholder='Password' style={styles.input} onChangeText={setPassword} secureTextEntry/>
+                    <TextInput placeholder='Password Authentication' style={styles.input} onChangeText={setConfirmPassword} secureTextEntry />
+                    <TextInput placeholder='Phone number' style={styles.input} onChangeText={setPhoneNumber} />
 
-                  <Text style={styles.acts}>Have any account ? <Text style={{color:"red", fontFamily:'Avenir'}} onPress={()=>navigator.navigate("login" as never)}>sign in</Text></Text>
-                  
-              </View>
-             
-          </View>
-    </SafeAreaView>
-  )
+                </View>
+                <View style={styles.actions}>
+                    <AlertNotificationRoot>
+                        <TouchableOpacity style={styles.btn} onPress={handleSignup}>
+                            <Text style={styles.inner}>Register</Text>
+                        </TouchableOpacity>
+                    </AlertNotificationRoot>
+                </View>
+                <View style={{marginTop: 10}}>
+                    <Text style={styles.acts}>Have any account ? <Text style={{ color: "red", fontFamily: 'Avenir' }} onPress={() => navigator.navigate("login" as never)}>sign in</Text></Text>
+                </View>
+            </View>
+        </SafeAreaView>
+    )
 }
 
 
@@ -58,7 +97,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#130F26',
         alignItems: 'center',
-        flexDirection:"column"
+        flexDirection: "column"
     },
 
     header: {
@@ -69,16 +108,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         // padding: 20,
-        
-        
+
+
     },
 
     headerText: {
         fontSize: 32,
-        fontFamily:'Avenirroman',
+        fontFamily: 'Avenirroman',
         color: "white",
         // fontFamily:"Avenir"
-        
+
     },
     content: {
         flex: 2,
@@ -90,24 +129,24 @@ const styles = StyleSheet.create({
         width: "100%",
         borderTopRightRadius: 38,
         borderTopLeftRadius: 38,
-        padding:20
+        padding: 20
     },
 
     container: {
         width: "100%",
-        gap:10
-        
+        gap: 10
+
     },
     input: {
         width: "100%",
         padding: 20,
         borderRadius: 15,
         backgroundColor: "white",
-        fontFamily:'Avenir',
-        height:60,
-        fontSize:18
+        fontFamily: 'Avenir',
+        height: 60,
+        fontSize: 18
 
-    
+
     },
 
     btn: {
@@ -116,19 +155,20 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 13,
-        borderRadius:15,
-        height:60,
+        borderRadius: 15,
+        height: 60,
 
     },
 
     inner: {
         color: "white",
-        fontFamily:'Avenir',
-        fontSize:20
-    } ,
+        fontFamily: 'Avenir',
+        fontSize: 20
+    },
 
     actions: {
-        width:"100%"
+        width: "100%",
+        flexDirection: "column",
     },
 
     acts: {
@@ -137,7 +177,7 @@ const styles = StyleSheet.create({
         color: "#2D2D2D80",
         fontFamily: 'Avenir'
     }
-    
+
 })
 
 // font-family: Avenir;

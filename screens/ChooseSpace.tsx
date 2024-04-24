@@ -1,12 +1,14 @@
-import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, TextInput} from "react-native";
+import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity, TextInput, Button } from "react-native";
 import { faAngleLeft, faClock, faFilter, faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
-import {GestureDetector, Gesture, GestureHandlerRootView} from "react-native-gesture-handler"
+import { GestureDetector, Gesture, GestureHandlerRootView } from "react-native-gesture-handler";
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withTiming,} from 'react-native-reanimated';
+    withTiming,
+} from 'react-native-reanimated';
 import React, { ReactNode, useState } from "react";
 import { useFonts } from "expo-font";
 import ButtonWithProps from "../components/buttonWithProps";
@@ -74,7 +76,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ children }) => {
         </GestureHandlerRootView>
     );
 };
-  
+
 const ChooseSpace: React.FC = () => {
 
     const navigation = useNavigation();
@@ -101,8 +103,8 @@ const ChooseSpace: React.FC = () => {
                 </Pressable>
                 <Text style={{ fontFamily: 'Avenirroman', fontSize: 22 }}>Choose Space</Text>
             </View>
-            <ScrollView  style={{}}horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={{ flexDirection: "row", gap: 20, marginLeft: 40, overflow: 'scroll',height:30 }}>
+            <ScrollView style={{}} horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={{ flexDirection: "row", gap: 20, marginLeft: 40, overflow: 'scroll', height: 30 }}>
                     <View style={{ backgroundColor: "#F43939", padding: 5, paddingHorizontal: 10, borderRadius: 15, justifyContent: "center" }}>
                         <Text style={{ fontFamily: "Avenir", color: "white" }}>1st Floor</Text>
                     </View>
@@ -197,6 +199,31 @@ const ChooseSpace: React.FC = () => {
             <TouchableOpacity style={{ width: '80%', }} onPress={() => navigation.navigate('book' as never)}>
                 <ButtonWithProps textColor="white" color="black" title="Book Space" />
             </TouchableOpacity>
+                {/* <AlertNotificationRoot>
+                    <View>
+                        <Button
+                            title={'dialog box'}
+                            onPress={() =>
+                                Dialog.show({
+                                    type: ALERT_TYPE.DANGER,
+                                    title: 'Success',
+                                    textBody: 'Congrats! this is dialog box success',
+                                    button: 'close',
+                                })
+                            }
+                        />
+                        <Button
+                            title={'toast notification'}
+                            onPress={() =>
+                                Toast.show({
+                                    type: ALERT_TYPE.SUCCESS,
+                                    title: 'Success',
+                                    textBody: 'Congrats! this is toast notification success',
+                                })
+                            }
+                        />
+                    </View>
+                </AlertNotificationRoot> */}
         </SafeAreaView>
 
     )
@@ -216,6 +243,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#EAEAF3',
     },
+
     carContainer:{
         width: '100%', 
         flexDirection: "row", 

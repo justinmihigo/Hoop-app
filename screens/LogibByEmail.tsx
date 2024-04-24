@@ -2,14 +2,30 @@ import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, Touch
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigation,Link } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import AppWriteService from "../src/appwrite/service";
+import { error } from '../src/appwrite/alert';
+import { AlertNotificationRoot } from 'react-native-alert-notification';
 
 export default function LoginByEmail() {
 
     const [selectedCountryCode,setSelectedCountryCode]= useState("")
 
     const navigator = useNavigation()
-
-
+    const [email,setEmail]= useState("");
+    const [password,setPassword]= useState("");
+    const handleLogin=()=>{
+        AppWriteService.signIn({email,password}).then(res=>{
+            if(res){
+                console.log(res);
+                navigator.navigate("home" as never);
+            }
+            else if(email===''){
+                error("The email  is empty.");
+            }
+        }).catch(err=>console.log(err));
+    };
+    console.log(email);
+    console.log(password);
     useLayoutEffect(() => {
 
         navigator.setOptions({
@@ -36,20 +52,8 @@ export default function LoginByEmail() {
             
                   
                   
-                 <TextInput placeholder='Email' style={styles.input}>
-                    <Text style={{fontSize:18,fontFamily:"Avenir"}}>Email</Text>
-                      
-              
-                  </TextInput>
-                  <TextInput placeholder='Password' style={styles.input}>
-                     {/* <Image style={{marginLeft:10}}source={require("../assets/Group (2).png")}></Image> */}
-                  
-                  <Text style={{fontSize:18,fontFamily:"Avenir"}}>Password</Text>
-                 
-
-
-                  
-                  </TextInput>
+                 <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail}/>                    
+                  <TextInput placeholder='Password' style={styles.input} onChangeText={setPassword} secureTextEntry/>
                   <Text style={styles.forgot}><Link to={"/ForgetPass"}><Text>Forgot password ?</Text></Link> <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
                   
               </View>
@@ -57,13 +61,14 @@ export default function LoginByEmail() {
                   
               </View>
               <View style={styles.actions}>
-                  
-                  <TouchableOpacity style={styles.btn}>
+                  <AlertNotificationRoot>
+                  <TouchableOpacity style={styles.btn} onPress={handleLogin}>
                       <Text style={styles.inner}>Login</Text>
                   </TouchableOpacity>
-
+                  </AlertNotificationRoot>
+                  <View>
                   <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("signup" as never)}>Sign up</Text></Text>
-                  
+                  </View>
               </View>
              
           </View>
@@ -147,7 +152,9 @@ const styles = StyleSheet.create({
     } ,
 
     actions: {
-        width:"100%"
+        width:"100%",
+        flexDirection: "column",
+        height: 90
     },
 
     acts: {
