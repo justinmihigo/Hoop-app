@@ -18,12 +18,14 @@ const appwriteClient = new Client();
 class AppwriteService{
     account;
     constructor(){
-        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662616a78ae57dcf1889");
+        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662645ec7cd5895be4f6");
         this.account = new Account(appwriteClient);
     }
     async createAccount({email, password,phoneNumber}:createAccountType){
         try {
             const response = await this.account.create(ID.unique(), email, password, phoneNumber);
+
+            console.log("----------->",response)
             return response;
         } catch (error) {
             console.log(error);
@@ -47,7 +49,7 @@ class AppwriteService{
                 Dialog.show({
                     type: ALERT_TYPE.DANGER,
                     title: 'Error',
-                    textBody: 'Incorrect assword ',
+                    textBody: 'Incorrect Password ',
                     button: 'close',
                 })
             )
@@ -80,12 +82,12 @@ class AppwriteService{
 export class AppwriteDb {
     database;
     constructor(){
-        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662616a78ae57dcf1889");
+        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662645ec7cd5895be4f6");
         this.database = new Databases(appwriteClient);
     }
     async createDocument({email, password,phoneNumber}:createAccountType){
         try {
-            const response = await this.database.createDocument("6628f7900748006a1b70","6628f79e8c2557b899fd",ID.unique(), {userId:ID.unique(), email, password, phoneNumber});
+            const response = await this.database.createDocument("6629208c3c3036e6aabb","6629fabb0945cdf2477b",ID.unique(), {email, password, phoneNumber});
             return response;
         } catch (error) {
             console.log(error);

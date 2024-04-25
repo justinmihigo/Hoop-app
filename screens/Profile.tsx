@@ -1,8 +1,10 @@
 import { View, Text,StyleSheet,Image,TextInput,ImageBackground ,TouchableOpacity} from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useFonts } from 'expo-font';
 import ProfileComponent from '../components/ProfileComponent';
-import {Link} from "@react-navigation/native"
+import {Link, useNavigation} from "@react-navigation/native"
+import AppwriteContext from '../src/appwrite/appwriteContext';
+import { AppContext } from '../context/Provider';
 interface Category {
     id: number;
     name: string;
@@ -11,6 +13,12 @@ interface Category {
   }
 
   const Profile: React.FC = () => {
+
+    const navigator = useNavigation()
+
+
+    const {appwriteService} = useContext(AppwriteContext)
+    const {currentUser} = useContext(AppContext)
 
     const categories: Category[] = [
         { 
@@ -65,6 +73,18 @@ interface Category {
         'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
     })
     if (!fontLoaded) return null;
+
+    const handleLogout=async()=>{
+        try {
+            await appwriteService.logout()
+
+            navigator.navigate("loginbyemail" as never);
+
+        
+        } catch (error) {
+            
+        }
+    }
   return (
     <View style={styles.mainContainer}>
 
@@ -92,15 +112,15 @@ interface Category {
 
                         <View style={{display:"flex",flexDirection:"column"}}>
                             <Link to={("/editProfile")}><Text style={{color:"#FFFFFF",fontSize:14,fontFamily:"Avenir"}}>Welcome</Text></Link>
-                            <Link to={("/editProfile")}><Text style={{color:"white",fontSize:20,fontFamily:"Avenir"}}>Diane</Text></Link>
+                            <Link to={("/editProfile")}><Text style={{color:"white",fontSize:20,fontFamily:"Avenir"}}>{currentUser}</Text></Link>
                        </View>
 
 
-             <TouchableOpacity>
-                    <View style={{borderRadius:10}}>
-                        <Image source={require("../assets/profilenavv.png")}></Image>
-                    </View>
-                    </TouchableOpacity>
+             <TouchableOpacity onPress={handleLogout}>
+                <View style={{borderRadius:10}}>
+                    <Image source={require("../assets/profilenavv.png")}></Image>
+                </View>
+            </TouchableOpacity>
 
              </View>
 {/* 

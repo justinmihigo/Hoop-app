@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -20,7 +20,7 @@ export default function SignupSCreen() {
     }, [])
     const handleSignup = () => {
         if (!validateEmail()) {
-            error("Enter a valid email address");
+            error( "Enter a valid email address");
             // Dialog.show({
             //     type: ALERT_TYPE.DANGER,
             //     title: 'Error',
@@ -32,16 +32,20 @@ export default function SignupSCreen() {
             error(`password do not match`);
         } 
         else if(email =='' || password == '') {
-                error("all fields no are required");
+                error("all fields are required");
         }
         else {
             AppwriteService.createAccount({ email, password, phoneNumber })
                 .then((res) => {
                     if (res) {
-                        successToast("success");
-                        setInterval(()=>navigation.navigate("home" as never), 1000);
+                        // successToast("success");
+                        Alert.alert("Success","account created succesfuly")
+                        setInterval(()=>navigation.navigate("loginbyemail" as never))
                     }
-                }).catch(e => console.log(e));
+                }).catch(e =>{
+                    Alert.alert("Error",e.message)
+                    return;
+                });
         }
     }
 
@@ -58,7 +62,6 @@ export default function SignupSCreen() {
         'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
     })
     if (!fontLoaded) return null;
-    console.log(email);
     return (
         <SafeAreaView style={styles.parent}>
             
@@ -70,10 +73,10 @@ export default function SignupSCreen() {
             <View style={styles.content}>
                 <View style={styles.container}>
 
-                    <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail} />
-                    <TextInput placeholder='Password' style={styles.input} onChangeText={setPassword} secureTextEntry/>
-                    <TextInput placeholder='Password Authentication' style={styles.input} onChangeText={setConfirmPassword} secureTextEntry />
-                    <TextInput placeholder='Phone number' style={styles.input} onChangeText={setPhoneNumber} />
+                    <TextInput placeholder='Email' value={email} style={styles.input} onChangeText={setEmail} />
+                    <TextInput placeholder='Password' value={password}  style={styles.input} onChangeText={setPassword} secureTextEntry/>
+                    <TextInput placeholder='Password Authentication' value={confirmPassword}  style={styles.input} onChangeText={setConfirmPassword} secureTextEntry />
+                    <TextInput placeholder='Phone number'  value={phoneNumber}  style={styles.input} onChangeText={setPhoneNumber} />
 
                 </View>
                 <View style={styles.actions}>
