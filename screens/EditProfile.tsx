@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     } ,
     innerr: {
         color: "#2D2D2D",
-        fontFamily:'AvenirBold',
+        fontFamily:'Avenirroman',
         fontSize:20,
         position:"relative",
         left:-50,

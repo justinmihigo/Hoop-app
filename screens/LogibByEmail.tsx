@@ -3,14 +3,15 @@ import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { useNavigation,Link } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import AppWriteService from "../src/appwrite/service";
-import { error } from '../src/appwrite/alert';
+import { error, success, successToast } from '../src/appwrite/alert';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
+import AppwriteContext from '../src/appwrite/appwriteContext';
 import { AppContext } from '../context/Provider';
 
 export default function LoginByEmail() {
-
+    const navigation= useNavigation();
     const [selectedCountryCode,setSelectedCountryCode]= useState("")
-
+    const { appwriteService,isLoggedin ,setIsLoggedin } = useContext(AppwriteContext);
     const navigator = useNavigation()
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
@@ -18,14 +19,20 @@ export default function LoginByEmail() {
     const {setCurrentUser} = useContext(AppContext)
 
     const handleLogin=()=>{
+        if(isLoggedin){
+            successToast("success");
+            setTimeout(()=>{
+            navigation.navigate("home" as never)},1000);
+            return
+        }
         AppWriteService.signIn({email,password}).then(res=>{
             if(res){
                 console.log("provider id : ---> ",res.providerUid);
                 setCurrentUser(res.providerUid)
                 navigator.navigate("home" as never);
             }
-            else if(email===''){
-                error("The email  is empty.");
+            else if(email===''|| password===''){
+                error("All fields are required");
             }
         }).catch(err=>console.log(err));
     };

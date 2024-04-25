@@ -51,7 +51,11 @@ interface Category {
                         <Text style={styles.Textt}>Find an easy parking spot</Text>
                     </View>
                     <View style={{borderRadius:10}}>
-                        <Image source={require("../assets/notfication.png")}></Image>
+                    <Link to={"/notifications"}>
+                        <View>
+                        <Image source={require("../assets/notfication.png")}/>
+                        </View>
+                        </Link>
                     </View>
                 </View>
 
@@ -70,7 +74,7 @@ interface Category {
      
         <View style={styles.BottomContainer}>
             <View style={styles.Categogly}>
-                <Text style={[{fontFamily:"Avenirbold"},styles.txtCategogly]}><Link to={'/explore'}>Category</Link></Text>
+                <Text style={[{fontFamily:"Avenirroman"},styles.txtCategogly]}><Link to={'/explore'}>Category</Link></Text>
             </View>
           
             <View style={styles.container}>
@@ -84,7 +88,7 @@ interface Category {
             ))}
            </View>
 
-           <Text  style={[{fontFamily:"Avenirbold"},styles.txtCategogly2]}>Nearst Parking Spaces</Text>
+           <Text  style={[{fontFamily:"Avenirroman"},styles.txtCategogly2]}>Nearst Parking Spaces</Text>
 
            <View style={styles.parkingContainer}>
            

@@ -11,7 +11,7 @@ import AppwriteService from "./service";
         setIsLoggedin: () => { },
     }
     export const AppwriteContext = createContext(defaultValue);
-    export const appwrite: React.FC<PropsWithChildren> = ({ children }) => {
+    export const AppwriteContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
         const [isLoggedin,setIsLoggedin] = useState(false);
         const initialValue={
             appwriteService: AppwriteService,

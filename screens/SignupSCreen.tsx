@@ -1,18 +1,20 @@
 import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useState, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import AppwriteService from "../src/appwrite/service";
 import { error, success, successToast } from '../src/appwrite/alert';
+import AppwriteContext from '../src/appwrite/appwriteContext';
 import { ID } from 'appwrite';
 import { AlertNotificationRoot, Dialog, ALERT_TYPE } from 'react-native-alert-notification';
 export default function SignupSCreen() {
+    const { appwriteService,isLoggedin ,setIsLoggedin } = useContext(AppwriteContext);
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const navigator = useNavigation()
-    const navigation=useNavigation();
+    const navigation = useNavigation();
     useLayoutEffect(() => {
         navigator.setOptions({
             headerShown: false
@@ -64,7 +66,7 @@ export default function SignupSCreen() {
     if (!fontLoaded) return null;
     return (
         <SafeAreaView style={styles.parent}>
-            
+
             <ImageBackground source={require("../assets/Group243.png")} style={styles.header}>
                 <View style={{ padding: 20 }}>
                     <Text style={styles.headerText}>Let’s start!!</Text>
@@ -86,7 +88,7 @@ export default function SignupSCreen() {
                         </TouchableOpacity>
                     </AlertNotificationRoot>
                 </View>
-                <View style={{marginTop: 10}}>
+                <View style={{ marginTop: 10 }}>
                     <Text style={styles.acts}>Have any account ? <Text style={{ color: "red", fontFamily: 'Avenir' }} onPress={() => navigator.navigate("login" as never)}>sign in</Text></Text>
                 </View>
             </View>

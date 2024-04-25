@@ -29,14 +29,12 @@ class AppwriteService{
             return response;
         } catch (error) {
             console.log(error);
-            return(
                 Dialog.show({
                     type: ALERT_TYPE.DANGER,
                     title: 'Error',
-                    textBody: error as string,
+                    textBody: "email already exists",
                     button: 'OK',
                 })
-            )
         }
     }
     async signIn({email, password}:loginAccountType){

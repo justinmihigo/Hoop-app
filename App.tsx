@@ -31,11 +31,13 @@ import UpgradePro from './screens/Upgradepro';
 import ChooseSpace from './screens/ChooseSpace';
 import ShowMaps from './screens/ShowMaps';
 import Book from './screens/Book';
+import { AppwriteContextProvider } from './src/appwrite/appwriteContext';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <Provider>
+
+    <AppwriteContextProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name='/' component={WelcomeScreen} />
@@ -72,7 +74,8 @@ export default function App() {
 
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
+    </AppwriteContextProvider>
+
   );
 }
 
