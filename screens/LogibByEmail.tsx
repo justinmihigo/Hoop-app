@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Pressable,Image } from 'react-native'
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { useNavigation,Link } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import AppWriteService from "../src/appwrite/service";
 import { error } from '../src/appwrite/alert';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
+import { AppContext } from '../context/Provider';
 
 export default function LoginByEmail() {
 
@@ -13,10 +14,14 @@ export default function LoginByEmail() {
     const navigator = useNavigation()
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
+
+    const {setCurrentUser} = useContext(AppContext)
+
     const handleLogin=()=>{
         AppWriteService.signIn({email,password}).then(res=>{
             if(res){
-                console.log(res);
+                console.log("provider id : ---> ",res.providerUid);
+                setCurrentUser(res.providerUid)
                 navigator.navigate("home" as never);
             }
             else if(email===''){
@@ -24,15 +29,13 @@ export default function LoginByEmail() {
             }
         }).catch(err=>console.log(err));
     };
-    console.log(email);
-    console.log(password);
-    useLayoutEffect(() => {
-
-        navigator.setOptions({
-            headerShown: false
-        })
-        
-    },[])
+  
+ 
+    // useLayoutEffect(()=>{
+    //     navigator.setOptions({
+    //                  headerShown: false
+    //              })
+    // },[])
     const [fontLoaded] = useFonts({
         'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
         'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
@@ -53,7 +56,7 @@ export default function LoginByEmail() {
                   
                   
                  <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail}/>                    
-                  <TextInput placeholder='Password' style={styles.input} onChangeText={setPassword} secureTextEntry/>
+                  <TextInput placeholder='Password'style={styles.input} onChangeText={setPassword} secureTextEntry/>
                   <Text style={styles.forgot}><Link to={"/ForgetPass"}><Text>Forgot password ?</Text></Link> <Text style={{ color: "red", fontFamily:"Avenir",}}>Retrieve</Text></Text>
                   
               </View>

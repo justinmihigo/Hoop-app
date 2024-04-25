@@ -1,9 +1,10 @@
 import { View, Text,StyleSheet,Image,TextInput,ImageBackground ,TouchableOpacity} from 'react-native'
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { useFonts } from 'expo-font';
 import CategoryCard from '../components/CategoriesComponent';
 import { useNavigation, Link } from '@react-navigation/native';
 import AppWriteService from '../src/appwrite/service'
+import { AppContext } from '../context/Provider';
 interface Category {
     id: number;
     name: string;
@@ -16,6 +17,8 @@ interface Category {
     // }
     
     // )
+
+    const {currentUser} = useContext(AppContext)
 
     const categories: Category[] = [
         { id: 1, name: 'Car', imageSource: require('../assets/acar.png') },
@@ -44,7 +47,7 @@ interface Category {
 
                 <View style={styles.textandNotfication}>
                     <View style={styles.TextContain}>
-                        <Text style={styles. header}><Link to={'/profile'}>Hola, Diane</Link>👋🏻</Text>
+                        <Text style={styles.header}><Link to={'/profile'}>Hola, {currentUser}</Link>👋🏻</Text>
                         <Text style={styles.Textt}>Find an easy parking spot</Text>
                     </View>
                     <View style={{borderRadius:10}}>
@@ -190,13 +193,19 @@ const styles = StyleSheet.create({
         display:"flex",
         flexDirection:"row",
         justifyContent:"space-between",
-        gap:80
+        // gap:80,
+        width:"100%",
+        paddingHorizontal:20,
+        alignItems:"center"
+        
 
     },
     TextContain:{
         display:"flex",
         flexDirection:"column",
-        gap:10
+        gap:10,
+        
+     
     },
 
     Categogly:{
@@ -217,8 +226,9 @@ const styles = StyleSheet.create({
     },
     header:{
         color:"#FFFFFF",
-        fontSize:28,
-        fontFamily:"Avenir"
+        fontSize:20,
+        fontFamily:"Avenir",
+        
     },
     Textt:{
         color:"#696969 | rgb(105,105,105)",
