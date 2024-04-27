@@ -1,11 +1,28 @@
     import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity,Image,KeyboardAvoidingView } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation,Link } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import AppWriteService from "../src/appwrite/service";
+import { error, successToast } from '../src/appwrite/alert';
 
 export default function ForgetPassword() {
 
     // const navigator = useNavigation()
+    const [email, setEmail]= useState("");
+    const handleReset=()=>{
+        AppWriteService.forgetPassword(email).then(res=>{
+            console.log(res)
+            if(res){
+                successToast("the email has been sent successfully");
+
+            }else{
+                error("check your email")
+            }
+        }).catch(err=>{
+            console.log(err)
+            error("invalid email");
+        })
+    }
 
     useLayoutEffect(() => {
 
@@ -46,16 +63,15 @@ export default function ForgetPassword() {
              <View style={styles.container}>
                     <Text style={styles.innerrTextt}>Email address</Text>
                     
-                    <TextInput placeholder='Email' style={styles.input}>
+                    <TextInput placeholder='Email' style={styles.input} onChangeText={setEmail}/>
 
-                    </TextInput>
               </View>
             </View>
           
               
               <View style={styles.actions}>
                   
-                  <TouchableOpacity style={styles.btn}>
+                  <TouchableOpacity style={styles.btn} onPress={handleReset}>
                       <Link to="/comfirm-forger"><Text style={styles.inner}>Send</Text></Link>
                   </TouchableOpacity>
                   

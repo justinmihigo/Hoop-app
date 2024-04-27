@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     header:{
         color:"#FFFFFF",
         fontSize:20,
-        fontFamily:"AvenirBold",
+        fontFamily:"Avenirroman",
         position:"relative",
         padding:40
     },

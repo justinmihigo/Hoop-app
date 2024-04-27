@@ -1,4 +1,4 @@
-import {ID, Account, Client, Databases } from "appwrite";
+import {ID, Account, Client, Databases, Storage, Permission, Role } from "appwrite";
 import { AlertNotificationRoot, Dialog, ALERT_TYPE } from "react-native-alert-notification";
 type createAccountType={
     phoneNumber: string;
@@ -13,13 +13,16 @@ type usersSchema={
     email: string;
     password: string;
     phoneNumber: string;
+    userId: string;
 }
 const appwriteClient = new Client();
 class AppwriteService{
     account;
+    storage;
     constructor(){
-        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662645ec7cd5895be4f6");
+        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662616a78ae57dcf1889");
         this.account = new Account(appwriteClient);
+        this.storage= new Storage(appwriteClient);
     }
     async createAccount({email, password,phoneNumber}:createAccountType){
         try {
@@ -41,7 +44,7 @@ class AppwriteService{
     }
     async signIn({email, password}:loginAccountType){
         try {
-            const response = await this.account.createEmailPasswordSession(email, password);
+            const response = await this.account.createEmailSession(email, password);
             return response;
         } catch (error) {
             console.log(error);
@@ -78,16 +81,56 @@ class AppwriteService{
             return 
         }
     }
+    async forgetPassword(email:string){
+        try {
+            const response = await this.account.createRecovery(email,"https://appwrite.io");
+            return response;
+        } catch (error) {
+            console.log(error);
+            return (
+                Dialog.show({
+                    type: ALERT_TYPE.DANGER,
+                    title: 'Error',
+                    textBody: "check your email",
+                    button: 'close',
+                })
+            )
+        }
+    }
+    async bucketCreate(file:File){
+        try {
+            const bucket = new Storage(appwriteClient);
+            const response = await bucket.createFile("662ac396dd372408d3a8",ID.unique(),
+            file,[
+                Permission.create(Role.any()),
+                Permission.write(Role.users()),
+                Permission.write(Role.any()),
+                Permission.read(Role.any()),
+                Permission.update(Role.any()),
+            ]);
+            return response;
+        } catch (error) {
+            console.log(error);
+            // return (
+            //     Dialog.show({
+            //         type: ALERT_TYPE.DANGER,
+            //         title: 'Error',
+            //         textBody: error as string,
+            //         button: 'close',
+            //     })
+            // )
+        }
+    }
 }
 export class AppwriteDb {
     database;
     constructor(){
-        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662645ec7cd5895be4f6");
+        appwriteClient.setEndpoint("https://cloud.appwrite.io/v1").setProject("662616a78ae57dcf1889");
         this.database = new Databases(appwriteClient);
     }
-    async createDocument({email, password,phoneNumber}:createAccountType){
+    async createDocument({userId,email, password,phoneNumber}:usersSchema){
         try {
-            const response = await this.database.createDocument("6629208c3c3036e6aabb","6629fabb0945cdf2477b",ID.unique(), {email, password, phoneNumber});
+            const response = await this.database.createDocument("6628f7900748006a1b70","6628f79e8c2557b899fd", ID.unique(), {userId, email, password, phoneNumber});
             return response;
         } catch (error) {
             console.log(error);
@@ -99,5 +142,6 @@ export class AppwriteDb {
                 })
         }
     }
+
 }
 export default new AppwriteService();

@@ -1,10 +1,13 @@
 import { View, Text,StyleSheet,Image,TextInput,ImageBackground ,TouchableOpacity} from 'react-native'
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { useFonts } from 'expo-font';
 import CategoryCard from '../components/CategoriesComponent';
 import { useNavigation, Link } from '@react-navigation/native';
 import AppWriteService from '../src/appwrite/service'
 import { AppContext } from '../context/Provider';
+import { AppwriteDb } from '../src/appwrite/service';
+import { Query } from 'appwrite';
+
 interface Category {
     id: number;
     name: string;
@@ -17,8 +20,40 @@ interface Category {
     // }
     
     // )
+    const {currentUser,setCurrentUser} = useContext(AppContext)
+    const [documentId, setDocumentId] =useState("");
+    const [fullName, setFullName] = useState("");
+    const handleGetItems = () => {
+        AppWriteService.getCurrentUser().then((res) => {
+            if (res) {
+                const userId = res.$id as string;
+                new AppwriteDb().database
+                    .listDocuments("6628f7900748006a1b70", "6628f79e8c2557b899fd", [Query.equal('userId', userId), Query.select(['$id'])])
+                    .then((res) => {
+                        if (res) {
+                            console.log(res.documents[0].$id);
+                            setDocumentId(() => res.documents[0].$id);
+                            new AppwriteDb().database.
+                                listDocuments("6628f7900748006a1b70",
+                                    "6628f79e8c2557b899fd", [Query.equal('$id', res.documents[0].$id)])
+                                .then((res) => {
+                                    if (res) {
+                                        console.log(res.documents[0]);
+                                        setFullName(()=>res.documents[0].fullName);
+                                        setCurrentUser(()=>res.documents[0].fullName);
+                                    }
+                                }
+                                )
+                                .catch((err) => console.log(err))
+                        }
+                    })
+            }
+        })
 
-    const {currentUser} = useContext(AppContext)
+    }
+    useEffect(() => {
+        handleGetItems();
+    },[AppWriteService]);
 
     const categories: Category[] = [
         { id: 1, name: 'Car', imageSource: require('../assets/acar.png') },
@@ -47,7 +82,7 @@ interface Category {
 
                 <View style={styles.textandNotfication}>
                     <View style={styles.TextContain}>
-                        <Text style={styles.header}><Link to={'/profile'}>Hola, {currentUser}</Link>👋🏻</Text>
+                        <Text style={styles.header}><Link to={'/profile'}>Hola, {fullName?fullName:currentUser}</Link>👋🏻</Text>
                         <Text style={styles.Textt}>Find an easy parking spot</Text>
                     </View>
                     <View style={{borderRadius:10}}>
@@ -70,7 +105,7 @@ interface Category {
      
         <View style={styles.BottomContainer}>
             <View style={styles.Categogly}>
-                <Text style={[{fontFamily:"Avenirbold"},styles.txtCategogly]}><Link to={'/explore'}>Category</Link></Text>
+                <Text style={[{fontFamily:"Avenirroman"},styles.txtCategogly]}><Link to={'/explore'}>Category</Link></Text>
             </View>
           
             <View style={styles.container}>
@@ -84,7 +119,7 @@ interface Category {
             ))}
            </View>
 
-           <Text  style={[{fontFamily:"Avenirbold"},styles.txtCategogly2]}>Nearst Parking Spaces</Text>
+           <Text  style={[{fontFamily:"Avenirroman"},styles.txtCategogly2]}>Nearst Parking Spaces</Text>
 
            <View style={styles.parkingContainer}>
            
