@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, ScrollView, Dimensions } from "react-native";
+import { SafeAreaView, View, Pressable, Text, StyleSheet, Image, ScrollView, Dimensions, Platform } from "react-native";
 import { faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
@@ -46,7 +46,12 @@ const ShowMaps: React.FC = () => {
             bottom: distance
         }
     })
-
+    if (Platform.OS==='web'){
+        return(
+            <View><Text>Map content</Text></View>
+        )
+    }
+    else{
     return (
         <SafeAreaView style={{ flex: 1 ,backgroundColor:"#F5F5F5"}}>
             <View>
@@ -154,6 +159,7 @@ const ShowMaps: React.FC = () => {
 
         </SafeAreaView>
     )
+}
 }
 export default ShowMaps;
 

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, Touch
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import AppwriteService from "../src/appwrite/service";
+import AppwriteService, { AppwriteDb } from "../src/appwrite/service";
 import { error, success, successToast } from '../src/appwrite/alert';
 import { ID } from 'appwrite';
 import { AlertNotificationRoot, Dialog, ALERT_TYPE } from 'react-native-alert-notification';
@@ -12,7 +12,7 @@ export default function SignupSCreen() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const navigator = useNavigation()
-    const navigation=useNavigation();
+    const navigation = useNavigation();
     useLayoutEffect(() => {
         navigator.setOptions({
             headerShown: false
@@ -20,7 +20,7 @@ export default function SignupSCreen() {
     }, [])
     const handleSignup = () => {
         if (!validateEmail()) {
-            error( "Enter a valid email address");
+            error("Enter a valid email address");
             // Dialog.show({
             //     type: ALERT_TYPE.DANGER,
             //     title: 'Error',
@@ -30,20 +30,32 @@ export default function SignupSCreen() {
         } else if (password !== confirmPassword) {
             console.log("password do not match")
             error(`password do not match`);
-        } 
-        else if(email =='' || password == '') {
-                error("all fields are required");
+        }
+        else if (email == '' || password == '') {
+            error("all fields are required");
         }
         else {
             AppwriteService.createAccount({ email, password, phoneNumber })
                 .then((res) => {
                     if (res) {
                         // successToast("success");
-                        Alert.alert("Success","account created succesfuly")
-                        setInterval(()=>navigation.navigate("loginbyemail" as never))
+                        Alert.alert("Success", "account created succesfuly");
+
+                        new AppwriteDb().createDocument({ userId: res.$id, email, password, phoneNumber })
+                            .then((res) => {
+                                console.log(res);
+                                success("account created succesfuly");
+                            }).catch((err) => {
+                                console.log(err);
+                                error("error creating account");
+                            })
+
+                        setTimeout(() => navigation.navigate("loginbyemail" as never));
+
                     }
-                }).catch(e =>{
-                    Alert.alert("Error",e.message)
+                }).catch(e => {
+                    Alert.alert("Error", e.message)
+                    error("Error creating account");
                     return;
                 });
         }
@@ -64,7 +76,7 @@ export default function SignupSCreen() {
     if (!fontLoaded) return null;
     return (
         <SafeAreaView style={styles.parent}>
-            
+
             <ImageBackground source={require("../assets/Group243.png")} style={styles.header}>
                 <View style={{ padding: 20 }}>
                     <Text style={styles.headerText}>Let’s start!!</Text>
@@ -74,9 +86,9 @@ export default function SignupSCreen() {
                 <View style={styles.container}>
 
                     <TextInput placeholder='Email' value={email} style={styles.input} onChangeText={setEmail} />
-                    <TextInput placeholder='Password' value={password}  style={styles.input} onChangeText={setPassword} secureTextEntry/>
-                    <TextInput placeholder='Password Authentication' value={confirmPassword}  style={styles.input} onChangeText={setConfirmPassword} secureTextEntry />
-                    <TextInput placeholder='Phone number'  value={phoneNumber}  style={styles.input} onChangeText={setPhoneNumber} />
+                    <TextInput placeholder='Password' value={password} style={styles.input} onChangeText={setPassword} secureTextEntry />
+                    <TextInput placeholder='Password Authentication' value={confirmPassword} style={styles.input} onChangeText={setConfirmPassword} secureTextEntry />
+                    <TextInput placeholder='Phone number' value={phoneNumber} style={styles.input} onChangeText={setPhoneNumber} />
 
                 </View>
                 <View style={styles.actions}>
@@ -86,7 +98,7 @@ export default function SignupSCreen() {
                         </TouchableOpacity>
                     </AlertNotificationRoot>
                 </View>
-                <View style={{marginTop: 10}}>
+                <View style={{ marginTop: 10 }}>
                     <Text style={styles.acts}>Have any account ? <Text style={{ color: "red", fontFamily: 'Avenir' }} onPress={() => navigator.navigate("login" as never)}>sign in</Text></Text>
                 </View>
             </View>

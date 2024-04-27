@@ -5,6 +5,7 @@ import ButtonWhite from "../components/buttonwhite";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native"
 import { NativeScreen } from "react-native-screens";
+import AppWriteService from "../src/appwrite/service";
 interface Item {
     id: string;
     image: ImageSourcePropType;
@@ -16,6 +17,7 @@ const WelcomeScreen: React.FC = () => {
     const flatListRef: any = useRef();
     const [activeIndex, setActiveIndex] = useState(0);
     const screenWidth = Dimensions.get("window").width;
+    const num=1;
     useEffect(() => {
         let interval = setInterval(() => {
             if (activeIndex === images.length - 1) {
@@ -59,6 +61,18 @@ const WelcomeScreen: React.FC = () => {
         description: "Find your perfect parking space wherever and whenever you need"
     }
     ]
+    
+    useEffect(()=>{
+        setTimeout(()=>{
+            AppWriteService.getCurrentUser().then((res)=>{
+                if(res){
+    
+                    navigation.navigate("home"as never);
+                }
+            })
+        },1000)
+        
+    },[num])
     const [fontLoaded] = useFonts({
         'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
         'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
